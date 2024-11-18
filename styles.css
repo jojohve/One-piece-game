@@ -31,7 +31,8 @@ body {
     width: 120px;
     height: 180px;
     background-color: #fff;
-    border: 2px solid #2d87f0; /* Azzurro per il bordo */
+    border: 2px solid #2d87f0;
+    /* Azzurro per il bordo */
     margin: 10px;
     display: flex;
     flex-direction: column;
@@ -42,23 +43,29 @@ body {
     position: relative;
     box-sizing: border-box;
     text-align: center;
-    border-radius: 10px; /* Angoli arrotondati */
+    border-radius: 10px;
+    /* Angoli arrotondati */
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
 }
 
 .card:hover {
-    transform: scale(1.05); /* Effetto di zoom */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Ombra per effetto hover */
+    transform: scale(1.05);
+    /* Effetto di zoom */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    /* Ombra per effetto hover */
 }
 
 .card.selected {
-    background-color: #4CAF50;  /* Colore di sfondo per le carte selezionate */
-    color: white;                /* Testo bianco per le carte selezionate */
+    background-color: #4CAF50;
+    /* Colore di sfondo per le carte selezionate */
+    color: white;
+    /* Testo bianco per le carte selezionate */
 }
 
 .card span {
     font-weight: bold;
 }
+
 .card .card-actions {
     margin-top: 10px;
 }
@@ -70,7 +77,8 @@ body {
     bottom: 0;
     left: 0;
     text-align: center;
-    background-color: rgba(0, 0, 0, 0.6); /* Trasparenza per il testo */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Trasparenza per il testo */
     color: white;
 }
 
@@ -84,7 +92,8 @@ body {
 .card button {
     padding: 5px;
     font-size: 14px;
-    background-color: #28a745; /* Verde per il bottone */
+    background-color: #28a745;
+    /* Verde per il bottone */
     color: white;
     border: none;
     border-radius: 5px;
@@ -93,7 +102,8 @@ body {
 }
 
 .card button:hover {
-    background-color: #218838; /* Verde scuro al passaggio del mouse */
+    background-color: #218838;
+    /* Verde scuro al passaggio del mouse */
 }
 
 .islands {
@@ -113,11 +123,13 @@ body {
     justify-content: center;
     align-items: center;
     margin: 10px;
-    border-radius: 10px; /* Angoli arrotondati per le isole */
+    border-radius: 10px;
+    /* Angoli arrotondati per le isole */
 }
 
 .island.hovered {
-    background-color: #d0d0d0; /* Colore di sfondo più scuro quando ci si passa sopra */
+    background-color: #d0d0d0;
+    /* Colore di sfondo più scuro quando ci si passa sopra */
 }
 
 .island.highlight {
@@ -139,20 +151,7 @@ button:hover {
     background-color: #218838;
 }
 
-.log {
-    width: 80%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-}
-
-.log ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.log li {
-    margin: 5px 0;
+.card-list {
+    display: flex;
+    margin-bottom: 100px;
 }
