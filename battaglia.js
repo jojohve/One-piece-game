@@ -5,7 +5,10 @@ const player2Cards = JSON.parse(localStorage.getItem('player2Cards')) || [];
 const islands = {
     'isola-mare': [],
     'isola-fuoco': [],
-    'isola-vento': []
+    'isola-vento': [],
+    'isola-ghiaccio': [],
+    'isola-terra': [],
+    'isola-oscura': []
 };
 
 let currentPlayer = 0; // 0 non è un giocatore, usato per il lancio della moneta
@@ -203,8 +206,9 @@ function useSpecialMove(card, player) {
 
     console.log(`${card.name} ha usato la mossa speciale: ${card.specialMove.name}`);
 
-    // Verifica se l'elemento della carta esiste
-    const cardElementId = `card-${player}-${player === 1 ? player1Cards.indexOf(card) : player2Cards.indexOf(card)}`;
+    // Calcola correttamente l'indice della carta in base al giocatore
+    const cardIndex = player === 1 ? player1Cards.indexOf(card) : player2Cards.indexOf(card);
+    const cardElementId = `card-${player}-${cardIndex}`;
     const cardElement = document.getElementById(cardElementId);
 
     if (!cardElement) {
@@ -437,10 +441,10 @@ function checkEndGame() {
     // Verifica se tutte le carte di un giocatore sono morte
     if (!player1Alive) {
         alert("Giocatore 2 ha vinto! Tutte le carte del Giocatore 1 sono state eliminate.");
-        resetGame();
+        showEndGameButton(); // Mostra il bottone per terminare la battaglia
     } else if (!player2Alive) {
         alert("Giocatore 1 ha vinto! Tutte le carte del Giocatore 2 sono state eliminate.");
-        resetGame();
+        showEndGameButton(); // Mostra il bottone per terminare la battaglia
     } else {
         // Verifica se un giocatore ha conquistato tutte le isole
         const player1IslandsConquered = checkIslandsConquered(player1Cards);
@@ -448,10 +452,10 @@ function checkEndGame() {
 
         if (player1IslandsConquered && !player2IslandsConquered) {
             alert("Giocatore 1 ha vinto! Ha conquistato tutte le isole.");
-            resetGame();
+            showEndGameButton(); // Mostra il bottone per terminare la battaglia
         } else if (!player1IslandsConquered && player2IslandsConquered) {
             alert("Giocatore 2 ha vinto! Ha conquistato tutte le isole.");
-            resetGame();
+            showEndGameButton(); // Mostra il bottone per terminare la battaglia
         }
     }
 }
@@ -473,6 +477,23 @@ function checkIslandsConquered(playerCards) {
 
     // Restituisce true se tutte le isole sono occupate dal giocatore
     return Object.values(islandsOccupied).every(island => island);
+}
+
+function showEndGameButton() {
+    // Crea il bottone
+    const endButton = document.createElement("button");
+    endButton.textContent = "Termina Battaglia";
+    endButton.id = "endGameButton";
+
+    // Aggiungi il bottone alla pagina (ad esempio dentro il body)
+    document.body.appendChild(endButton);
+
+    // Aggiungi l'evento per resettare il gioco e tornare alla home
+    endButton.addEventListener("click", function() {
+        alert("La battaglia è stata terminata e il gioco è stato resettato.");
+        resetGame(); // Reset del gioco
+        window.location.href = "index.html"; // Torna alla pagina principale
+    });
 }
 
 // Salva lo stato del gioco
