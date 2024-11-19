@@ -10,21 +10,29 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .turn-info {
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 100%;
     margin-bottom: 20px;
+    font-size: 18px;
+    color: #333;
+}
+
+.turn-info h2, .turn-info h3 {
+    margin: 0;
 }
 
 .player-area {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    width: 80%;
-    margin: 10px;
+    width: 100%;
+    margin: 20px 0;
 }
 
 .card {
@@ -32,7 +40,6 @@ body {
     height: 180px;
     background-color: #fff;
     border: 2px solid #2d87f0;
-    /* Azzurro per il bordo */
     margin: 10px;
     display: flex;
     flex-direction: column;
@@ -44,22 +51,23 @@ body {
     box-sizing: border-box;
     text-align: center;
     border-radius: 10px;
-    /* Angoli arrotondati */
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card:hover {
     transform: scale(1.05);
-    /* Effetto di zoom */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    /* Ombra per effetto hover */
 }
 
 .card.selected {
     background-color: #4CAF50;
-    /* Colore di sfondo per le carte selezionate */
     color: white;
-    /* Testo bianco per le carte selezionate */
+}
+
+.disabled {
+    pointer-events: none; /* Impedisce l'interazione con l'elemento */
+    opacity: 0.5; /* Cambia l'opacità per mostrare visivamente che è disabilitata */
 }
 
 .card span {
@@ -78,7 +86,6 @@ body {
     left: 0;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.6);
-    /* Trasparenza per il testo */
     color: white;
 }
 
@@ -93,7 +100,6 @@ body {
     padding: 5px;
     font-size: 14px;
     background-color: #28a745;
-    /* Verde per il bottone */
     color: white;
     border: none;
     border-radius: 5px;
@@ -103,19 +109,18 @@ body {
 
 .card button:hover {
     background-color: #218838;
-    /* Verde scuro al passaggio del mouse */
 }
 
 .islands {
     display: flex;
-    justify-content: space-around;
-    width: 80%;
+    justify-content: space-between;
+    width: 100%;
     margin-top: 50px;
     margin-bottom: 50px;
 }
 
 .island {
-    width: 250px;
+    width: 520px;
     height: 160px;
     background-color: #f0f0f0;
     border: 2px dashed #ccc;
@@ -124,16 +129,20 @@ body {
     align-items: center;
     margin: 10px;
     border-radius: 10px;
-    /* Angoli arrotondati per le isole */
 }
 
 .island.hovered {
     background-color: #d0d0d0;
-    /* Colore di sfondo più scuro quando ci si passa sopra */
 }
 
 .island.highlight {
     border: 2px dashed #00ff00;
+}
+
+.island-name {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
 }
 
 button {
@@ -154,4 +163,29 @@ button:hover {
 .card-list {
     display: flex;
     margin-bottom: 100px;
+}
+
+/* Sezione per separare visivamente i team */
+.player-area-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Aggiungi separazione visiva tra i due giocatori */
+.player-area-container h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+#end-turn-1, #end-turn-2 {
+    width: 100%;
+    margin: 20px 0;
+    font-size: 18px;
+    background-color: #007bff;
+}
+
+#end-turn-1:hover, #end-turn-2:hover {
+    background-color: #0056b3;
 }
