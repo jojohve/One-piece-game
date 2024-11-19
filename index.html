@@ -1,39 +1,30 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Selezione delle Carte</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>One Piece Game</title>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 
 <body>
-    <div class="selection-container">
-        <h2>Seleziona le tue carte</h2>
-    
-        <!-- Lista delle carte disponibili -->
-        <h3>Carte Disponibili</h3>
-        <div id="available-cards" class="card-list">
-            <!-- Le carte disponibili saranno renderizzate qui -->
-        </div>
-    
-        <!-- Giocatore 1 -->
-        <h3>Giocatore 1</h3>
-        <div id="player1-cards" class="card-list">
-            <!-- Le carte del Giocatore 1 saranno renderizzate qui -->
-        </div>
-    
-        <!-- Giocatore 2 -->
-        <h3>Giocatore 2</h3>
-        <div id="player2-cards" class="card-list">
-            <!-- Le carte del Giocatore 2 saranno renderizzate qui -->
-        </div>
-    
-        <button id="start-battle" disabled>Inizia la Battaglia</button>
-    </div>
+    <h1>One Piece Game</h1>
 
-    <script src="selection.js"></script>
+    <!-- Sezione delle carte disponibili -->
+    <h2>Carte Disponibili</h2>
+    <div id="available-cards"></div>
+
+    <!-- Sezione dei mazzi -->
+    <h2>Team Giocatore 1</h2>
+    <div id="player1-cards"></div>
+
+    <h2>Team Giocatore 2</h2>
+    <div id="player2-cards"></div>
+
+    <button id="start-battle">Inizia la Battaglia</button>
+
+    <script type="module" src="./js/selection.js"></script>
 </body>
 
 </html>
