@@ -18,6 +18,7 @@ function useSpecialMove(card, player) {
         return; // Esci se l'elemento non esiste
     }
 
+    // Applicazione della classe di mossa speciale per la carta
     cardElement.classList.add('special-move-used');
     setTimeout(() => cardElement.classList.remove('special-move-used'), 1000);
 
@@ -26,9 +27,16 @@ function useSpecialMove(card, player) {
         const enemyIslandName = getCardIsland(enemyCard, player === 1 ? 2 : 1);
         const attackerIslandName = getCardIsland(card, player);
 
+        // Confronta le isole e applica il danno se corrispondono
         if (attackerIslandName === enemyIslandName) {
             enemyCard.hp -= card.specialMove.damage;
-            updateCardDisplay(enemyCard, player === 1 ? 2 : 1, player === 1 ? player2Cards.indexOf(enemyCard) : player1Cards.indexOf(enemyCard));
+
+            // Controlla che l'elemento della carta nemica esista nel DOM prima di aggiornare
+            const enemyCardIndex = player === 1 ? player2Cards.indexOf(enemyCard) : player1Cards.indexOf(enemyCard);
+            const enemyCardElement = document.getElementById(`card-${player === 1 ? 2 : 1}-${enemyCardIndex}`);
+            if (enemyCardElement) {
+                updateCardDisplay(enemyCard, player === 1 ? 2 : 1, enemyCardIndex);
+            }
 
             if (enemyCard.hp <= 0) {
                 console.log(`${enemyCard.name} è stata eliminata!`);
@@ -38,16 +46,19 @@ function useSpecialMove(card, player) {
         }
     });
 
+    // Segna che la mossa speciale è stata usata
     if (player === 1) {
         player1Actions.hasUsedSpecialMove = true;
     } else {
         player2Actions.hasUsedSpecialMove = true;
     }
 
+    // Salva lo stato del gioco e controlla la fine
     saveGameState();
     checkEndGame();
 }
 
+// Funzione per usare l'Haki
 function useHaki(card, player) {
     if (card.usedHaki) {
         console.log(`${card.name} ha già usato l'Haki!`);
@@ -58,15 +69,15 @@ function useHaki(card, player) {
 
     switch (card.haki) {
         case "Armatura":
-            card.hp += 20;
+            card.hp += 20;  // Aumenta i punti vita
             break;
         case "Osservazione":
-            card.nextAttackDamage = 0; // Questo sembra un effetto temporaneo
+            card.nextAttackDamage = 0;  // Riduce danno successivo a 0 (effetto temporaneo)
             break;
         case "Conquistatore":
             const playerCards = player === 1 ? player1Cards : player2Cards;
             playerCards.forEach(playerCard => {
-                playerCard.hp += 20;
+                playerCard.hp += 20;  // Aumenta i punti vita a tutte le carte del giocatore
                 updateCardDisplay(playerCard, player, playerCards.indexOf(playerCard));
             });
             break;
@@ -79,8 +90,9 @@ function useHaki(card, player) {
     updateCardDisplay(card, player, player === 1 ? player1Cards.indexOf(card) : player2Cards.indexOf(card));
 }
 
+// Funzione per rimuovere una carta dal mazzo
 function removeCardFromPlayerDeck(card, playerCards) {
-    const cardIndex = playerCards.indexOf(card);
+    const cardIndex = playerCards.findIndex(c => c.id === card.id); // Usa l'ID per trovare la carta
     if (cardIndex !== -1) {
         // Rimuove la carta dal mazzo
         playerCards.splice(cardIndex, 1);

@@ -79,6 +79,7 @@ function removeCardFromIsland(card, player) {
     }
 }
 
+// Funzione per il drop della carta
 function drop(event) {
     event.preventDefault();
 
