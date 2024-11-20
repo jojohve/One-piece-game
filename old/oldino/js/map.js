@@ -1,24 +1,25 @@
 // Array di isole
 const islands = [
-    'Arlong Park', 
-    'Baratie', 
+    'Arlong Park',
+    'Baratie',
     'Logue Town',
     'Regno dei Ciliegi',
     'Alabasta',
     'Water Seven',
     'Ohara',
     'Enies Lobby',
-    'Skypea', 
+    'Skypea',
     'Thriller Bark',
-    'Arcipelago Sabaody', 
+    'Arcipelago Sabaody',
     'Amazon Lily',
     'Impel Down',
     'Marineford',
     'Isola degli Uomini-Pesce',
     'Punk Hazard',
-    'Dressrosa', 
+    'Dressrosa',
     'Whole Cake Island',
-    'Wano', 
+    'Zou',
+    'Wano',
     'Egg-Head'
 ];
 
@@ -37,7 +38,7 @@ function assignIslandIDs() {
 
     // Seleziona tutte le isole nel DOM
     const islandElements = document.querySelectorAll('.island');
-    
+
     // Verifica che ci siano abbastanza isole nel DOM
     if (islandElements.length !== islands.length) {
         console.warn('Il numero di isole nel DOM non corrisponde al numero di isole nell\'array.');

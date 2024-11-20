@@ -1,0 +1,23 @@
+/* Sezione delle isole */
+.island {
+    width: 200px;
+    height: 200px;
+    margin: 10px auto;
+    background-color: #e6d5b8;
+    border: 3px dashed #4b2e0e;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #4b2e0e;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.island.highlight {
+    background-color: #d9b77c;
+    border-color: #9a6c3a;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}

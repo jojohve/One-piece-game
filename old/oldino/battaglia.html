@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One Piece Card Game</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/card.css">
-    <link rel="stylesheet" href="css/mappa.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+    <title>Battaglia - Gioco di Carte One Piece</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -47,7 +44,7 @@
                 <span class="island-name">Isola 5</span>
                 <!-- Le carte posizionate qui appariranno sotto -->
             </div>
-        </div>
+        </div>        
 
         <h3>Giocatore 2 - Team</h3>
         <button id="end-turn-2" class="end-turn">Termina Turno Giocatore 2</button>
@@ -57,9 +54,11 @@
         </div>
     </div>
 
-    <script type="module" src="js/ui.js"></script>
-    <script type="module" src="js/card.js"></script>
-    <script src="js/game.js"></script>
+    <script src="./js/map.js"></script>
+    <script type="module" src="js/cards.js"></script>
+    <script src="./js/battle.js"></script>
+    <script src="./js/movement.js"></script>
+    <script src="./js/turn.js"></script>
 </body>
 
 </html>
