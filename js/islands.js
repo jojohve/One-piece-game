@@ -22,10 +22,27 @@ const islands = [
     'Egg-Head'
 ];
 
-function randomizeIslands () {
+export function assignIslandToDiv() {
+    const islandDivs = document.querySelectorAll('.island');
 
-}
+    // Usa solo le prime 5 isole dall'array
+    const selectedIslands = islands.slice(0, 5);
 
-function assegnaIsole () {
-
+    if (islandDivs.length === selectedIslands.length) {
+        islandDivs.forEach((islandDiv, index) => {
+            const islandName = selectedIslands[index];
+            
+            // Assegna l'ID e il nome dell'isola
+            islandDiv.setAttribute('id', `island-${index + 1}`);
+            islandDiv.setAttribute('data-island', islandName);
+            
+            // Aggiorna il contenuto del div
+            const islandNameSpan = islandDiv.querySelector('.island-name');
+            if (islandNameSpan) {
+                islandNameSpan.innerText = islandName;
+            }
+        });
+    } else {
+        console.log("Il numero di div con classe 'island' non corrisponde a 5.");
+    }
 }

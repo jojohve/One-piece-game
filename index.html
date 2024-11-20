@@ -1,35 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One Piece Card Game</title>
-    <link rel="stylesheet" href="css/card.css">
+    <title>Selezione delle Carte</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/card.css">
 </head>
 
 <body>
-    <h1>One Piece Game</h1>
+    <div class="selection-container">
+        <h2>Seleziona le tue carte</h2>
 
-    <!-- Sezione delle carte disponibili -->
-    <h2>Carte Disponibili</h2>
-    <div id="available-cards" class="card-list"></div>
+        <!-- Lista delle carte disponibili -->
+        <h3>Carte Disponibili</h3>
+        <div id="available-cards" class="card-list">
+            <!-- Le carte disponibili saranno renderizzate qui -->
+        </div>
 
-    <!-- Sezione dei mazzi -->
-    <h2>Team Giocatore 1</h2>
-    <div id="player1-cards"></div>
+        <!-- Giocatore 1 -->
+        <h3>Giocatore 1</h3>
+        <div id="player1-cards">
+            <!-- Le carte del Giocatore 1 saranno renderizzate qui -->
+        </div>
 
-    <h2>Team Giocatore 2</h2>
-    <div id="player2-cards"></div>
+        <!-- Giocatore 2 -->
+        <h3>Giocatore 2</h3>
+        <div id="player2-cards">
+            <!-- Le carte del Giocatore 2 saranno renderizzate qui -->
+        </div>
 
-    <button id="start-battle">Inizia la Battaglia</button>
+        <button id="start-battle" disabled>Inizia la Battaglia</button>
+    </div>
 
-    <script type="module" src="./js/ui.js"></script>
-    <script type="module" src="./js/card.js"></script>
-    <script src="./js/game.js"></script>
-    <script src="./js/selection.js"></script>
+    <script type="module" src="js/team.js"></script>
+    <script type="module" src="js/selectionTeam.js"></script>
+    <script type="module" src="js/ui.js"></script>
+    <script type="module" src="js/game.js"></script>
+    <script type="module" src="js/islands.js"></script>
+    <script type="module" src="js/cardMovement.js"></script>
+    <script type="module" src="js/rules.js"></script>
+    <script type="module" src="js/turn.js"></script>
 </body>
 
 </html>

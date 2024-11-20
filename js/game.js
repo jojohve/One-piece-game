@@ -1,32 +1,26 @@
-// Recupera i mazzi dal localStorage
-const player1Cards = JSON.parse(localStorage.getItem('player1Cards')) || [];
-const player2Cards = JSON.parse(localStorage.getItem('player2Cards')) || [];
+import { assignIslandToDiv } from './islands.js';
+import { player1Deck, player2Deck } from './selectionTeam.js';
+import { switchTurn } from './rules.js';
 
-let currentPlayer = 0; // 0 non è un giocatore, usato per il lancio della moneta
+// Funzione per avviare il gioco
+export function startGame() {
+    const savedPlayer1Deck = JSON.parse(localStorage.getItem('player1Deck')) || [];
+    const savedPlayer2Deck = JSON.parse(localStorage.getItem('player2Deck')) || [];
 
-function startGame() {
+    // Ripristina i mazzi
+    savedPlayer1Deck.forEach((cardName) => player1Deck.push(getCardByName(cardName)));
+    savedPlayer2Deck.forEach((cardName) => player2Deck.push(getCardByName(cardName)));
+
+    // Assegna le isole ai div
+    assignIslandToDiv();
+    console.log('Le isole sono state assegnate con successo!');
+
+    console.log('Gioco avviato!');
     testaOcroce();
+    switchTurn();
 }
 
-function checkforwinner() {
-    // Verifica se almeno una carta di ciascun giocatore è ancora viva
-    const player1Alive = player1Cards.some(card => card.hp > 0);
-    const player2Alive = player2Cards.some(card => card.hp > 0);
-
-    // Verifica se tutte le carte di un giocatore sono morte
-    if (!player1Alive) {
-        alert("Giocatore 2 ha vinto! Tutte le carte del Giocatore 1 sono state eliminate.");
-        showEndGameButton(); // Mostra il bottone per terminare la battaglia
-    } else if (!player2Alive) {
-        alert("Giocatore 1 ha vinto! Tutte le carte del Giocatore 2 sono state eliminate.");
-        showEndGameButton(); // Mostra il bottone per terminare la battaglia
-    }
-}
-
-function resetGame() {
-
-}
-
+// Funzione di testa o croce
 function testaOcroce() {
     // Lancio della moneta per determinare chi inizia
     const coinFlip = Math.random() < 0.5 ? 'testa' : 'croce';
