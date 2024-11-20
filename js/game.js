@@ -1,4 +1,3 @@
-import { assignIslandToDiv } from './islands.js';
 import { player1Deck, player2Deck } from './selectionTeam.js';
 import { switchTurn } from './rules.js';
 
@@ -12,7 +11,7 @@ export function startGame() {
     savedPlayer2Deck.forEach((cardName) => player2Deck.push(getCardByName(cardName)));
 
     // Assegna le isole ai div
-    assignIslandToDiv();
+    assignIslandIDs();
     console.log('Le isole sono state assegnate con successo!');
 
     console.log('Gioco avviato!');
@@ -36,4 +35,13 @@ function testaOcroce() {
         console.log('Giocatore 2 inizia!');
         document.getElementById('current-player').innerText = currentPlayer;
     }
+}
+
+export function resetGame() {
+    // Rimuove i mazzi salvati in localStorage
+    localStorage.removeItem('player1Cards');
+    localStorage.removeItem('player2Cards');
+
+    // Reindirizza alla pagina index.html
+    window.location.href = 'index.html';
 }

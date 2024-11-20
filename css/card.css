@@ -11,6 +11,7 @@
     font-family: Arial, sans-serif; /* Font leggibile */
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animazione per hover */
     flex-shrink: 0;
+    z-index: 100;
 }
 
 .card:hover {
@@ -20,7 +21,7 @@
 }
 
 /* Stile per i titoli (nomi delle carte) */
-.card h3 {
+.card span {
     font-size: 1.4rem; /* Dimensione del titolo */
     color: #333; /* Colore scuro per il testo */
     margin-bottom: 10px; /* Distanza sotto il titolo */
@@ -64,4 +65,15 @@
     height: 400px;
     overflow-x: scroll;
     gap: 5px;
+}
+
+.card .haki-button, .card .special-move-button {
+    font-size: 14px;
+    padding: 10px;
+    margin: 1px;
+    background-color: rgb(255, 100, 100);
+}
+
+.card .haki-button:hover, .card .special-move-button:hover {
+    background-color: rgb(202, 93, 93);
 }

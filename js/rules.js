@@ -9,6 +9,10 @@ export function switchTurn() {
     console.log(`Il turno è passato a: Giocatore ${turnRules.currentPlayer}`);
 }
 
+import { resetGame } from './game.js';  // Importa la funzione
+// Gestisci il click sul pulsante per resettare il gioco
+document.getElementById('reset-button').addEventListener('click', resetGame);
+
 /*
 // Variabili di stato per il controllo delle azioni per turno
     let player1Actions = {

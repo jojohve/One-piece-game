@@ -20,34 +20,30 @@
         <button id="end-turn-1" class="end-turn">Termina Turno Giocatore 1</button>
 
         <h3>Giocatore 1 - Team</h3>
-        <div class="player-area" id="player1-cards">
+        <div class="player-area" id="player1-deck">
             <!-- Le carte del giocatore 1 verranno renderizzate qui -->
         </div>
 
         <div id="islands" class="islands">
             <h3>Isole</h3>
-            <div class="island" id="isola-fuoco">
-                <span class="island-name">Isola del Fuoco</span>
+            <div class="island" id="">
+                <span class="island-name">Isola 1</span>
                 <!-- Le carte posizionate qui appariranno sotto -->
             </div>
-            <div class="island" id="isola-vento">
-                <span class="island-name">Isola del Vento</span>
+            <div class="island" id="">
+                <span class="island-name">Isola 2</span>
                 <!-- Le carte posizionate qui appariranno sotto -->
             </div>
-            <div class="island" id="isola-mare">
-                <span class="island-name">Isola del Mare</span>
+            <div class="island" id="">
+                <span class="island-name">Isola 3</span>
                 <!-- Le carte posizionate qui appariranno sotto -->
             </div>
-            <div class="island" id="isola-ghiaccio">
-                <span class="island-name">Isola del Ghiaccio</span>
+            <div class="island" id="">
+                <span class="island-name">Isola 4</span>
                 <!-- Le carte posizionate qui appariranno sotto -->
             </div>
-            <div class="island" id="isola-terra">
-                <span class="island-name">Isola della Terra</span>
-                <!-- Le carte posizionate qui appariranno sotto -->
-            </div>
-            <div class="island" id="isola-oscura">
-                <span class="island-name">Isola dell'Oscurità</span>
+            <div class="island" id="">
+                <span class="island-name">Isola 5</span>
                 <!-- Le carte posizionate qui appariranno sotto -->
             </div>
         </div>
@@ -55,16 +51,18 @@
         <h3>Giocatore 2 - Team</h3>
         <button id="end-turn-2" class="end-turn">Termina Turno Giocatore 2</button>
 
-        <div class="player-area" id="player2-cards">
+        <div class="player-area" id="player2-deck">
             <!-- Le carte del giocatore 2 verranno renderizzate qui -->
         </div>
     </div>
 
+    <button id="reset-button">Torna alla Home</button>
+
     <script type="module" src="js/team.js"></script>
     <script type="module" src="js/game.js"></script>
+    <script type="module" src="js/cardMovement.js"></script>
     <script type="module" src="js/ui.js"></script>
     <script type="module" src="js/islands.js"></script>
-    <script type="module" src="js/cardMovement.js"></script>
     <script type="module" src="js/rules.js"></script>
     <script type="module" src="js/turn.js"></script>
 </body>

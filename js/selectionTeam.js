@@ -8,15 +8,25 @@ export const player2Deck = player2Cards;  // Aggiungi questa riga
 
 // Funzione per selezionare una carta
 function selectCard(card, player) {
-    // Se il giocatore ha meno di 6 carte e la carta non è già nel mazzo
-    if (player === 1 && player1Cards.length < 6 && !player1Cards.includes(card)) {
+    // Controlla se la carta è già presente nel mazzo del giocatore
+    if ((player === 1 && player1Cards.includes(card)) || (player === 2 && player2Cards.includes(card))) {
+        showErrorMessage(`La carta ${card.name} è già nel mazzo del giocatore ${player}`);
+        return;
+    }
+
+    // Se il giocatore ha meno di 6 carte, aggiungi la carta al mazzo
+    if (player === 1 && player1Cards.length < 6) {
         player1Cards.push(card);
         console.log(`Carta ${card.name} aggiunta al mazzo del giocatore 1`);
         displayCards(1);
-    } else if (player === 2 && player2Cards.length < 6 && !player2Cards.includes(card)) {
+    } else if (player === 2 && player2Cards.length < 6) {
         player2Cards.push(card);
         console.log(`Carta ${card.name} aggiunta al mazzo del giocatore 2`);
         displayCards(2);
+    } else {
+        // Se il giocatore ha già 6 carte, mostra un messaggio di errore
+        showErrorMessage(`Il giocatore ${player} ha già 6 carte nel mazzo.`);
+        return;
     }
 
     // Se entrambi i giocatori hanno 6 carte, abilita il pulsante per iniziare la battaglia
@@ -79,8 +89,8 @@ function displayCards(player) {
             Haki: ${card.haki}<br>
             Mossa: ${card.specialMove.name}<br>
             Danno: ${card.specialMove.damage}<br>
-            Isola Preferita: ${card.preferredIsland}<br>
-            Frutto: ${card.fruitType}
+            Isola: ${card.preferredIsland}<br>
+            Tipo: ${card.fruitType}
             <button class="remove-card-btn">Rimuovi dal team</button>
         `;
 
@@ -121,6 +131,19 @@ document.getElementById('start-battle').addEventListener('click', () => {
     // Reindirizza alla pagina della battaglia
     window.location.href = 'battaglia.html';
 });
+
+// Funzione per mostrare il messaggio di errore
+function showErrorMessage(message) {
+    const errorMessage = document.createElement('div');
+    errorMessage.classList.add('error-message');
+    errorMessage.textContent = message;
+    document.body.appendChild(errorMessage);
+
+    // Nascondi il messaggio dopo 3 secondi
+    setTimeout(() => {
+        errorMessage.remove();
+    }, 3000);
+}
 
 // Inizializza la visualizzazione
 displayAvailableCards();  // Mostra le carte disponibili per la selezione
