@@ -1,8 +1,6 @@
 import { turnRules } from './rules.js';
 import { switchTurn } from './rules.js';
 
-let turnNumber = 0;
-
 export function updateTurn() {
     // Logica per disabilitare le carte nemiche
     // e altre azioni specifiche del turno

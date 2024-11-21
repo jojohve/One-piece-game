@@ -1,5 +1,6 @@
 import { dragStart } from './cardMovement.js';
 import { dragEnd } from './cardMovement.js';
+import { selectedCard } from './cardMovement.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     // Ora il DOM è pronto per essere manipolato
@@ -22,9 +23,13 @@ function displayBattleCards(player, playerCards) {
     playerArea.innerHTML = ''; // Svuota la zona prima di aggiungere nuove carte
 
     playerCards.forEach((card, index) => {
+        if (!card.currentPosition) {
+            card.currentPosition = null; // Inizialmente nessuna posizione
+        }
         const cardElement = document.createElement('div');
         cardElement.classList.add('card');
-        cardElement.setAttribute('id', `battle-card-${player}-${index}`);
+        const cardId = `battle-card-${player}-${index}`;
+        cardElement.setAttribute('id', cardId);
         cardElement.setAttribute('draggable', 'true'); // Aggiungi l'attributo draggable per abilitare il drag
 
         // Contenuto della carta
@@ -42,6 +47,11 @@ function displayBattleCards(player, playerCards) {
             </div>
         `;
 
+        // Aggiungi evento click per selezionare la carta
+        cardElement.addEventListener('click', () => {
+            selectedCard(cardId, card); // Passa l'ID e i dati della carta
+        });
+
         // Aggiungi gli eventi di drag-and-drop direttamente alla carta appena creata
         cardElement.addEventListener('dragstart', dragStart);  // Avvia il drag
         cardElement.addEventListener('dragend', dragEnd);  // Termina il drag
@@ -57,6 +67,48 @@ function displayBattleCards(player, playerCards) {
         // Aggiungi la carta al DOM
         playerArea.appendChild(cardElement);
     });
+}
+
+// Funzione per aggiornare la posizione della carta tramite ID
+export function updateCardPosition(cardId, newPosition) {
+    console.log(`Aggiorna posizione della carta con ID: ${cardId} alla nuova posizione: ${newPosition}`);
+    
+    // Estrai il numero del giocatore e l'indice dalla carta ID
+    const [_, player, index] = cardId.split('-');  // Splitta 'battle-card-1-3' in ['battle', '1', '3']
+    
+    // Converti l'indice in un numero intero
+    const cardIndex = parseInt(index, 10);
+
+    // Seleziona il mazzo in base al giocatore
+    let currentDeck;
+    if (player === '1') {
+        currentDeck = window.player1Deck;  // Usa il mazzo del Giocatore 1
+    } else if (player === '2') {
+        currentDeck = window.player2Deck;  // Usa il mazzo del Giocatore 2
+    } else {
+        console.error('Giocatore non valido');
+        return;
+    }
+
+    // Verifica se currentDeck è definito prima di procedere
+    if (!currentDeck) {
+        console.error('Mazzo non trovato');
+        return;
+    }
+
+    // Trova la carta nel mazzo del giocatore
+    const card = currentDeck.find(c => c.index === cardIndex);
+
+    // Verifica se la carta è stata trovata
+    if (!card) {
+        console.error(`Carta con indice ${cardIndex} non trovata nel mazzo del Giocatore ${player}`);
+        return;
+    }
+
+    // Aggiorna la posizione della carta
+    card.currentPosition = newPosition;
+
+    console.log(`Posizione della carta con ID ${cardId} aggiornata a: ${newPosition}`);
 }
 
 // Recupera i mazzi dal localStorage e visualizzali quando la pagina di battaglia è caricata

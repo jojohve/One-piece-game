@@ -32,7 +32,7 @@ function shuffleArray(arr) {
 }
 
 // Funzione per assegnare gli ID delle isole all'HTML
-function assignIslandIDs() {
+export function assignIslandIDs() {
     // Mescola l'array delle isole
     shuffleArray(islands);
 

@@ -77,3 +77,21 @@
 .card .haki-button:hover, .card .special-move-button:hover {
     background-color: rgb(202, 93, 93);
 }
+
+/* Effetto per la carta selezionata */
+.card.selected {
+    border: 2px solid #FFD700; /* Aggiunge un bordo dorato alla carta selezionata */
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8); /* Aggiunge un'ombra dorata */
+}
+
+/* Disabilita i bottoni per la carta deselezionata */
+.card-actions button {
+    pointer-events: none; /* Disabilita il click sui bottoni inizialmente */
+    opacity: 0.5; /* Rende i bottoni meno visibili quando disabilitati */
+}
+
+/* Abilita i bottoni per la carta selezionata */
+.card.selected .card-actions button {
+    pointer-events: auto; /* Rende i bottoni cliccabili */
+    opacity: 1; /* Restituisce la visibilità normale */
+}
