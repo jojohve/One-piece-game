@@ -1,13 +1,16 @@
-import { turnRules } from './rules.js';
 import { checkPreferredIslandAndBoostDamage } from './rules.js';  // Assicurati di importare correttamente la funzione
-import { getCardById } from './ui.js';  // Importazione corretta della funzione
+import { updateCardPosition } from './ui.js';  // Aggiungi questa riga per importare la funzione
 
 let lastSelectedCard = null; // Variabile globale per tenere traccia della carta selezionata
 
 // Funzione per iniziare il drag della carta
 export function dragStart(event) {
+    const cardId = event.target.id;  // Ottieni l'ID della carta
     // Memorizza l'ID dell'elemento trascinato
     event.dataTransfer.setData('text', event.target.id);
+
+    console.log('Carta in drag:', cardId);
+    event.dataTransfer.setData("text", cardId);  // Trasferisci l'ID della carta
     event.target.classList.add('dragging');  // Aggiunge una classe per evidenziare la carta
 }
 
@@ -35,29 +38,27 @@ function removeHighlight(event) {
 function drop(event) {
     event.preventDefault();
 
-    const cardId = event.dataTransfer.getData("text");  // Ottieni l'ID della carta
+    const cardId = event.dataTransfer.getData("text"); // Ottieni l'ID della carta
     console.log(`ID carta ottenuto dal drop: ${cardId}`);
 
-    const island = event.target;
-
+    const island = event.target;  // L'elemento su cui stai "rilasciando" la carta
     if (!island.classList.contains('island')) {
         console.warn("Target non valido per il drop.");
         return;
     }
 
-    // Ottieni l'ID dell'isola
-    const islandId = island.id;
+    const islandId = island.id;  // Assicurati di ottenere l'ID dell'isola correttamente
+    console.log(`Isola target per il drop: ${islandId}`);
 
-    // Usa la funzione per aggiornare la posizione della carta
-    updateCardPosition(cardId, islandId);  // Aggiorna la posizione della carta
+    // Ora puoi aggiornare la posizione della carta
+    updateCardPosition(cardId, islandId);  // Usa l'islandId per aggiornare la posizione della carta
 
     // Trova l'elemento DOM della carta e spostalo nell'isola
     const cardElement = document.getElementById(cardId);
     island.appendChild(cardElement);
 
-    // Altri logici di gioco (boost danno, etc.)
-    checkPreferredIslandAndBoostDamage(cardId, islandId);  // Passa l'ID carta e l'ID isola
-    removeHighlight(event);  // Rimuovi evidenza di drop
+    const boostedDamage = checkPreferredIslandAndBoostDamage(cardId, islandId);
+    console.log(`Danno finale della mossa speciale: ${boostedDamage}`);    removeHighlight(event);  // Rimuovi evidenza di drop
 }
 
 // Aggiungi gli eventi ai membri delle carte

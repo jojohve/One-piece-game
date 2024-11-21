@@ -32,6 +32,9 @@ function displayBattleCards(player, playerCards) {
         cardElement.setAttribute('id', cardId);
         cardElement.setAttribute('draggable', 'true'); // Aggiungi l'attributo draggable per abilitare il drag
 
+        // Associa i dati della carta all'elemento DOM
+        cardElement.cardData = card;
+
         // Contenuto della carta
         cardElement.innerHTML = `
             <span>${card.name}</span><br>
@@ -69,46 +72,48 @@ function displayBattleCards(player, playerCards) {
     });
 }
 
-// Funzione per aggiornare la posizione della carta tramite ID
-export function updateCardPosition(cardId, newPosition) {
-    console.log(`Aggiorna posizione della carta con ID: ${cardId} alla nuova posizione: ${newPosition}`);
-    
+export function getCardById(cardId) {
+    console.log(`Ricerca carta con ID: ${cardId}`);
+
     // Estrai il numero del giocatore e l'indice dalla carta ID
-    const [_, player, index] = cardId.split('-');  // Splitta 'battle-card-1-3' in ['battle', '1', '3']
-    
-    // Converti l'indice in un numero intero
-    const cardIndex = parseInt(index, 10);
+    const [_, player, index] = cardId.split('-');  // Esempio: 'battle-card-1-3' diventa ['battle', '1', '3']
+    const cardIndex = parseInt(index, 10);  // Converte l'indice da stringa a numero
 
-    // Seleziona il mazzo in base al giocatore
-    let currentDeck;
-    if (player === '1') {
-        currentDeck = window.player1Deck;  // Usa il mazzo del Giocatore 1
-    } else if (player === '2') {
-        currentDeck = window.player2Deck;  // Usa il mazzo del Giocatore 2
-    } else {
-        console.error('Giocatore non valido');
-        return;
-    }
+    // A seconda del numero del giocatore (1 o 2), scegli il mazzo giusto
+    const currentDeck = player === '1' ? window.player1Deck : window.player2Deck;
 
-    // Verifica se currentDeck è definito prima di procedere
-    if (!currentDeck) {
-        console.error('Mazzo non trovato');
-        return;
-    }
-
-    // Trova la carta nel mazzo del giocatore
+    // Trova la carta nel mazzo usando l'indice
     const card = currentDeck.find(c => c.index === cardIndex);
 
-    // Verifica se la carta è stata trovata
     if (!card) {
-        console.error(`Carta con indice ${cardIndex} non trovata nel mazzo del Giocatore ${player}`);
+        console.error(`Carta con ID ${cardId} non trovata nel mazzo del giocatore ${player}.`);
+        return null;
+    }
+
+    console.log('Carta trovata:', card);
+    return card;  // Restituisce l'oggetto della carta trovata
+}
+
+// Funzione per aggiornare la posizione della carta
+export function updateCardPosition(cardId, islandId) {
+    console.log(`Aggiorno la posizione della carta ${cardId} sull'isola ${islandId}`);
+
+    // Recupera l'elemento DOM della carta per ottenere i dettagli
+    const cardElement = document.getElementById(cardId);
+    if (!cardElement) {
+        console.error(`Elemento DOM per la carta con ID ${cardId} non trovato.`);
         return;
     }
 
-    // Aggiorna la posizione della carta
-    card.currentPosition = newPosition;
+    // Aggiorna la posizione corrente (currentPosition) usando direttamente il riferimento della carta droppata
+    const cardData = cardElement.cardData; // cardData è un attributo associato all'elemento DOM
+    if (!cardData) {
+        console.error(`Nessun dato associato alla carta con ID ${cardId}.`);
+        return;
+    }
 
-    console.log(`Posizione della carta con ID ${cardId} aggiornata a: ${newPosition}`);
+    cardData.currentPosition = islandId; // Aggiorniamo solo currentPosition
+    console.log(`Posizione corrente della carta aggiornata a: ${islandId}`);
 }
 
 // Recupera i mazzi dal localStorage e visualizzali quando la pagina di battaglia è caricata

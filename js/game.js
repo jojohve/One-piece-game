@@ -6,6 +6,14 @@ export function startGame() {
     const player1Deck = getDeckFromStorage('player1');
     const player2Deck = getDeckFromStorage('player2');
 
+    // Imposta i mazzi globali
+    window.player1Deck = player1Deck;
+    window.player2Deck = player2Deck;
+
+    // Log dei mazzi ora che sono definiti
+    console.log('Mazzo del Giocatore 1:', window.player1Deck);
+    console.log('Mazzo del Giocatore 2:', window.player2Deck);
+    
     if (!player1Deck || !player2Deck) {
         console.error('I mazzi non sono stati caricati correttamente!');
         return;

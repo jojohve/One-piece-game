@@ -1,5 +1,4 @@
 import { resetGame } from './game.js';  // Importa la funzione
-import { getCardById } from './ui.js';  // Assicurati di importarla correttamente
 
 export const turnRules = {
     currentPlayer: 1,
@@ -24,22 +23,24 @@ export function switchTurn() {
 }
 
 // Funzione per aumentare il danno se la carta è sulla sua isola preferita
-export function checkPreferredIslandAndBoostDamage(card, islandId) {
-    // Verifica se la carta è valida
-    if (!card || !card.specialMove) {
-        console.warn("Carta non valida o mossa speciale mancante.");
-        return 0;  // Ritorna un valore di default se la carta è non valida
+export function checkPreferredIslandAndBoostDamage(cardId, islandId) {
+    // Ottieni l'elemento DOM della carta
+    const cardElement = document.getElementById(cardId);
+    if (!cardElement || !cardElement.cardData) {
+        console.warn(`Carta con ID ${cardId} non trovata o dati mancanti.`);
+        return 0; // Valore di default
     }
+
+    const card = cardElement.cardData; // Recupera i dati della carta
 
     // Verifica se la carta è posizionata sull'isola preferita
-    const position = turnRules.cardPositions[card.id];
-
-    if (position && position.islandId === islandId) {
-        console.log("Boost applicato a " + card.name);
-        return card.specialMove.damage + 20;  // Aggiungi il boost
+    if (card.preferredIsland === islandId) {
+        console.log(`Boost applicato alla mossa speciale di ${card.name} (+20 danni).`);
+        return card.specialMove.damage + 20; // Applica il boost
     }
 
-    return card.specialMove.damage;  // Ritorna il danno originale
+    console.log(`Nessun boost applicato alla mossa speciale di ${card.name}.`);
+    return card.specialMove.damage; // Ritorna il danno originale
 }
 
 // Funzione per verificare se ci sono carte avversarie nella stessa isola
