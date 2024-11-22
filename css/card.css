@@ -67,6 +67,10 @@
     gap: 5px;
 }
 
+.card-actions {
+    display: flex;
+}
+
 .card .haki-button, .card .special-move-button {
     font-size: 14px;
     padding: 10px;
@@ -94,4 +98,9 @@
 .card.selected .card-actions button {
     pointer-events: auto; /* Rende i bottoni cliccabili */
     opacity: 1; /* Restituisce la visibilità normale */
+}
+
+.card.disabled {
+    opacity: 0.5; /* Cambia l'opacità della carta disabilitata */
+    pointer-events: none; /* Impedisce ulteriori clic sulla carta */
 }

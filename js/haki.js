@@ -1,7 +1,9 @@
 import { getCardById } from './ui.js'; // Assicurati che questa funzione sia disponibile
+import { hakiPerPartita } from './rules.js';
 
 export function useHaki(cardId) {
     console.log(`Chiamata funzione useHaki con ID ${cardId}`);
+    hakiPerPartita(cardId);
 
     const card = getCardById(cardId); // Recupera la carta usando il suo ID
     if (!card) {
@@ -9,13 +11,16 @@ export function useHaki(cardId) {
         return;
     }
 
-    if (card.haki > 0) {
-        card.haki -= 1; // Riduce il valore di Haki
-        console.log(`Haki usato per la carta ${card.name}. Haki rimanente: ${card.haki}`);
-    } else {
-        console.warn(`Haki esaurito per la carta ${card.name}`);
+    if (card.hasUsedHaki) {
+        console.log(`${card.name} ha già usato l'Haki in questa partita!`);
+        return false; // Impedisce ulteriori usi
     }
+
+    card.hasUsedHaki = true; // Registra l'uso dell'Haki
+    console.log(`${card.name} ha usato l'Haki con successo!`);
 
     // Aggiorna la visualizzazione della carta
     updateCardDisplay(cardId);
+
+    return true; // Conferma l'uso
 }

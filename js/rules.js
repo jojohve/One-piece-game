@@ -72,6 +72,81 @@ export function checkForOpponentCardsOnSameIsland(cardId) {
     }
 }
 
+export let player1Actions = {
+    hasDropped: false,
+    hasUsedSpecialMove: false,
+};
+
+export let player2Actions = {
+    hasDropped: false,
+    hasUsedSpecialMove: false,
+};
+
+export function azionePerTurno(cardId) {
+    const currentPlayer = turnRules.currentPlayer;
+    const currentPlayerActions = currentPlayer === 1 ? player1Actions : player2Actions;
+
+    if (currentPlayerActions.hasDropped) {
+        console.log("Hai già effettuato un'azione in questo turno!");
+        return false; 
+    }
+
+    console.log(`La carta con ID ${cardId} è stata spostata.`);
+    currentPlayerActions.hasDropped = true;
+    return true; 
+}
+
+export function mossaPerTurno(cardId) {
+    const currentPlayer = turnRules.currentPlayer;
+    const currentPlayerActions = currentPlayer === 1 ? player1Actions : player2Actions;
+
+    if (currentPlayerActions.hasUsedSpecialMove) {
+        console.log("Hai già usato la mossa speciale in questo turno!");
+        return false; 
+    }
+
+    console.log(`La carta con ID ${cardId} ha usato la mossa speciale!`);
+    currentPlayerActions.hasUsedSpecialMove = true;
+    return true; 
+}
+
+export function hakiPerPartita(cardId) {
+    const card = getCardById(cardId);
+
+    if (card.hasUsedHaki) {
+        console.log(`${card.name} ha già usato l'Haki in questa partita!`);
+        return false; 
+    }
+
+    card.hasUsedHaki = true;
+    console.log(`${card.name} ha usato l'Haki con successo!`);
+    return true; 
+}
+
+export function effettoTipo(attackingCardId, defendingCardId) {
+    const attackingCard = getCardById(attackingCardId);
+    const defendingCard = getCardById(defendingCardId);
+
+    const typeAdvantages = {
+        Paramisha: 'Zoan',
+        Zoan: 'Rogia',
+        Rogia: 'Paramisha',
+    };
+
+    if (attackingCard.fruitType === defendingCard.fruitType) {
+        console.log("Nessun vantaggio o svantaggio tra i tipi!");
+        return 0; // Nessun bonus
+    }
+
+    if (typeAdvantages[attackingCard.fruitType] === defendingCard.fruitType) {
+        console.log(`${attackingCard.name} ha un vantaggio di tipo!`);
+        return 20; // Bonus danno
+    }
+
+    console.log(`${defendingCard.name} ha un vantaggio di tipo!`);
+    return -20; // Penalità danno
+}
+
 document.getElementById('end-turn-1').addEventListener('click', () => {
     switchTurn(); // Passa al Giocatore 2
 });
@@ -82,32 +157,3 @@ document.getElementById('end-turn-2').addEventListener('click', () => {
 
 // Gestisci il click sul pulsante per resettare il gioco
 document.getElementById('reset-button').addEventListener('click', resetGame);
-
-/*
-// Variabili di stato per il controllo delle azioni per turno
-    let player1Actions = {
-        hasDropped: false, // Controlla se il giocatore 1 ha già effettuato un drop
-        hasUsedSpecialMove: false, // Controlla se il giocatore 1 ha già usato la mossa speciale
-    };
-
-    let player2Actions = {
-        hasDropped: false, // Controlla se il giocatore 2 ha già effettuato un drop
-        hasUsedSpecialMove: false, // Controlla se il giocatore 2 ha già usato la mossa speciale
-    };
-
-    function mossaPerTurno() {
-
-    }
-
-    function azionePerTurno() {
-
-    }
-
-    function hakiPerPartita() {
-
-    }
-
-    function effettoTipo() {
-
-    }
-*/

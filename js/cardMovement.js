@@ -1,4 +1,4 @@
-import { checkPreferredIslandAndBoostDamage } from './rules.js';  // Assicurati di importare correttamente la funzione
+import { checkPreferredIslandAndBoostDamage,azionePerTurno } from './rules.js';  // Assicurati di importare correttamente la funzione
 import { updateCardPosition } from './ui.js';  // Aggiungi questa riga per importare la funzione
 
 let lastSelectedCard = null; // Variabile globale per tenere traccia della carta selezionata
@@ -40,6 +40,7 @@ function drop(event) {
 
     const cardId = event.dataTransfer.getData("text"); // Ottieni l'ID della carta
     console.log(`ID carta ottenuto dal drop: ${cardId}`);
+    azionePerTurno(cardId);
 
     const island = event.target;  // L'elemento su cui stai "rilasciando" la carta
     if (!island.classList.contains('island')) {
