@@ -1,6 +1,8 @@
 import { dragStart } from './cardMovement.js';
 import { dragEnd } from './cardMovement.js';
 import { selectedCard } from './cardMovement.js';
+import { useHaki } from './haki.js';
+import { useSpecialMove } from './specialMove.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     // Ora il DOM è pronto per essere manipolato
@@ -61,11 +63,11 @@ function displayBattleCards(player, playerCards) {
 
         // Aggiungi il listener per il bottone Haki
         const hakiButton = cardElement.querySelector('.haki-button');
-        hakiButton.addEventListener('click', () => useHaki(card, player));
+        hakiButton.addEventListener('click', () => useHaki(cardId));
 
         // Aggiungi il listener per il bottone Mossa Speciale
         const specialMoveButton = cardElement.querySelector('.special-move-button');
-        specialMoveButton.addEventListener('click', () => useSpecialMove(card, player));
+        specialMoveButton.addEventListener('click', () => useSpecialMove(cardId));
 
         // Aggiungi la carta al DOM
         playerArea.appendChild(cardElement);
@@ -114,6 +116,36 @@ export function updateCardPosition(cardId, islandId) {
 
     cardData.currentPosition = islandId; // Aggiorniamo solo currentPosition
     console.log(`Posizione corrente della carta aggiornata a: ${islandId}`);
+}
+
+// Funzione per aggiornare la visualizzazione di una carta
+export function updateCardDisplay(cardId) {
+    // Trova l'elemento DOM della carta
+    const cardElement = document.getElementById(cardId);
+    if (!cardElement || !cardElement.cardData) {
+        console.warn(`Elemento DOM o dati della carta con ID ${cardId} non trovati.`);
+        return;
+    }
+
+    // Recupera i dati della carta
+    const cardData = cardElement.cardData;
+
+    // Aggiorna i campi specifici della carta
+    cardElement.innerHTML = `
+        <span>${cardData.name}</span><br>
+        HP: ${cardData.hp}<br>
+        Haki: ${cardData.haki}<br>
+        Mossa: ${cardData.specialMove.name}<br>
+        Danno: ${cardData.specialMove.damage}<br>
+        Isola: ${cardData.preferredIsland}<br>
+        Frutto: ${cardData.fruitType}
+        <div class="card-actions">
+            <button class="haki-button">Usa Haki</button>
+            <button class="special-move-button">Usa Mossa Speciale</button>
+        </div>
+    `;
+    
+    console.log(`Visualizzazione aggiornata per la carta ${cardData.name} con ID ${cardId}`);
 }
 
 // Recupera i mazzi dal localStorage e visualizzali quando la pagina di battaglia è caricata

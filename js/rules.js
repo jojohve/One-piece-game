@@ -1,4 +1,5 @@
 import { resetGame } from './game.js';  // Importa la funzione
+import { updateCardDisplay } from './ui.js';
 
 export const turnRules = {
     currentPlayer: 1,
@@ -33,29 +34,38 @@ export function checkPreferredIslandAndBoostDamage(cardId, islandId) {
 
     const card = cardElement.cardData; // Recupera i dati della carta
 
-    // Verifica se la carta è posizionata sull'isola preferita
     if (card.preferredIsland === islandId) {
-        console.log(`Boost applicato alla mossa speciale di ${card.name} (+20 danni).`);
-        return card.specialMove.damage + 20; // Applica il boost
+        if (!card.boosted) {
+            card.specialMove.damage += 20; // Applica il boost
+            card.boosted = true;
+            console.log(`Boost applicato: ${card.name} ora ha ${card.specialMove.damage} danni.`);
+        } else {
+            console.log(`Boost già applicato a ${card.name}.`);
+        }
+    } else if (card.boosted) {
+        card.specialMove.damage -= 20; // Rimuovi il boost
+        card.boosted = false;
+        console.log(`Boost rimosso: ${card.name} torna a ${card.specialMove.damage} danni.`);
     }
 
-    console.log(`Nessun boost applicato alla mossa speciale di ${card.name}.`);
-    return card.specialMove.damage; // Ritorna il danno originale
+    // Ritorna sempre il danno attuale della mossa speciale
+    updateCardDisplay(cardId); // Aggiorna la visualizzazione della carta
+    return card.specialMove.damage;
 }
 
 // Funzione per verificare se ci sono carte avversarie nella stessa isola
 export function checkForOpponentCardsOnSameIsland(cardId) {
     const currentPlayer = turnRules.currentPlayer;
     const opponentPlayer = currentPlayer === 1 ? 2 : 1;
-    const currentPosition = turnRules.cardPositions[cardId]?.islandId;  // Usa turnRules.cardPositions
+    const currentPosition = turnRules.cardPositions[cardId]?.islandId;
 
     const opponentCardsOnIsland = Object.keys(turnRules.cardPositions).filter((otherCardId) => {
-        const otherCardPosition = turnRules.cardPositions[otherCardId]?.islandId;  // Usa turnRules.cardPositions
+        const otherCardPosition = turnRules.cardPositions[otherCardId]?.islandId;
         return otherCardPosition === currentPosition && getCardById(otherCardId)?.player === opponentPlayer;
     });
 
     if (opponentCardsOnIsland.length > 0) {
-        // Attiva la mossa speciale
+        // Usa la mossa speciale sulla lista di carte avversarie
         useSpecialMove(cardId, opponentCardsOnIsland);
     } else {
         console.log(`Nessuna carta avversaria nella stessa isola di ${cardId}`);

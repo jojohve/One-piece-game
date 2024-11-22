@@ -57,8 +57,12 @@ function drop(event) {
     const cardElement = document.getElementById(cardId);
     island.appendChild(cardElement);
 
-    const boostedDamage = checkPreferredIslandAndBoostDamage(cardId, islandId);
-    console.log(`Danno finale della mossa speciale: ${boostedDamage}`);    removeHighlight(event);  // Rimuovi evidenza di drop
+    // Applica il boost se necessario
+    const finalDamage = checkPreferredIslandAndBoostDamage(cardId, islandId);
+    const cardName = cardElement.cardData?.name || "Carta sconosciuta";
+    console.log(`Danno finale della mossa speciale per ${cardName}: ${finalDamage}`);
+    
+    removeHighlight(event);  // Rimuovi evidenza di drop
 }
 
 // Aggiungi gli eventi ai membri delle carte
@@ -77,6 +81,12 @@ document.querySelectorAll('.island').forEach(island => {
 // Funzione per selezionare una carta
 export function selectedCard(cardId, cardData) {
     const cardElement = document.getElementById(cardId);
+
+    // Verifica che l'evento di click non sia stato generato da un bottone
+    if (event.target.classList.contains('haki-button') || event.target.classList.contains('special-move-button')) {
+        console.log("Cliccato su un bottone, non selezionare la carta.");
+        return;  // Esci dalla funzione se è stato cliccato un bottone
+    }
 
     // Se una carta è già selezionata, deselezionala
     if (lastSelectedCard && lastSelectedCard !== cardElement) {
