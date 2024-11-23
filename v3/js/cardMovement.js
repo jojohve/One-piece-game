@@ -6,8 +6,6 @@ let lastSelectedCard = null; // Variabile globale per tenere traccia della carta
 // Funzione per iniziare il drag della carta
 export function dragStart(event) {
     const cardId = event.target.id;  // Ottieni l'ID della carta
-    azionePerTurno(cardId);
-
     // Memorizza l'ID dell'elemento trascinato
     event.dataTransfer.setData('text', event.target.id);
 
@@ -49,6 +47,7 @@ function drop(event) {
         console.warn("Target non valido per il drop.");
         return;
     }
+    azionePerTurno(cardId);
 
     const islandId = island.id;  // Assicurati di ottenere l'ID dell'isola correttamente
     console.log(`Isola target per il drop: ${islandId}`);

@@ -1,8 +1,16 @@
 import { turnRules } from './rules.js';
 import { assignIslandIDs } from './islands.js';
+import { disableCards } from './turn.js';
 
 // Funzione per avviare il gioco
 export function startGame() {
+    // Impostiamo tutte le carte disabilitate all'inizio
+    disableCards();
+
+    // Disabilitiamo i bottoni di fine turno inizialmente
+    document.getElementById('end-turn-1').disabled = true;
+    document.getElementById('end-turn-2').disabled = true;
+
     const player1Deck = getDeckFromStorage('player1');
     const player2Deck = getDeckFromStorage('player2');
 
@@ -13,7 +21,7 @@ export function startGame() {
     // Log dei mazzi ora che sono definiti
     console.log('Mazzo del Giocatore 1:', window.player1Deck);
     console.log('Mazzo del Giocatore 2:', window.player2Deck);
-    
+
     if (!player1Deck || !player2Deck) {
         console.error('I mazzi non sono stati caricati correttamente!');
         return;

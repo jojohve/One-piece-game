@@ -8,19 +8,17 @@ export function resetPlayerActions() {
     player2Actions.hasUsedSpecialMove = false;
 }
 
-// Disabilita le carte di un giocatore
-function disableCards(_opponentPlayer) {
-    const cards = document.querySelectorAll(`.card-${player}`);
+export function disableCards(player) {
+    const cards = document.querySelectorAll(`.card-${player}`); // Seleziona solo le carte del giocatore
     cards.forEach(card => {
-        card.classList.add('disabled');
+        card.classList.add('disabled'); // Aggiungi la classe "disabled" per disabilitare la carta
     });
 }
 
-// Abilita le carte di un giocatore
-function enableCards(_currentPlayer) {
-    const cards = document.querySelectorAll(`.card-${player}`);
+function enableCards(player) {
+    const cards = document.querySelectorAll(`.card-${player}`); // Seleziona solo le carte del giocatore
     cards.forEach(card => {
-        card.classList.remove('disabled');
+        card.classList.remove('disabled'); // Rimuovi la classe "disabled" per abilitare la carta
     });
 }
 
@@ -40,6 +38,7 @@ export function updateTurn() {
 
     // Passa al prossimo giocatore
     turnRules.currentPlayer = turnRules.currentPlayer === 1 ? 2 : 1;
+    currentPlayer = turnRules.currentPlayer;
     document.getElementById('current-player').innerText = currentPlayer;
     console.log(`Turno del Giocatore ${currentPlayer}`);
 
