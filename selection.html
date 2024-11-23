@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Piece Card Game -Selection</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/card.css">
+</head>
+
+<body>
+    <div class="selection-container">
+        <h2>Seleziona le tue carte</h2>
+
+        <!-- Lista delle carte disponibili -->
+        <h3>Carte Disponibili</h3>
+        <div id="available-cards" class="card-list">
+            <!-- Le carte disponibili saranno renderizzate qui -->
+        </div>
+
+        <!-- Giocatore 1 -->
+        <h3>Giocatore 1</h3>
+        <div id="player1-cards">
+            <!-- Le carte del Giocatore 1 saranno renderizzate qui -->
+        </div>
+
+        <!-- Giocatore 2 -->
+        <h3>Giocatore 2</h3>
+        <div id="player2-cards">
+            <!-- Le carte del Giocatore 2 saranno renderizzate qui -->
+        </div>
+
+        <button id="start-battle" class="disabled" disabled>Inizia la Battaglia</button>
+    </div>
+
+    <script type="module" src="js/cards.js"></script>
+    <script type="module" src="js/selection.js"></script>
+</body>
+
+</html>

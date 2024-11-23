@@ -1,0 +1,38 @@
+/* Sezione delle isole */
+.islands {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* Due colonne con larghezza uguale */
+    gap: 50px;  /* Spaziatura tra le isole */
+    justify-items: center;  /* Centra le isole all'interno delle colonne */
+    margin: 20px auto;  /* Imposta un margine per centrare la griglia */
+}
+
+/* Stile per ogni isola */
+.island {
+    width: 100%;  /* Le isole occupano tutta la larghezza della colonna */
+    max-width: 600px;  /* Imposta una larghezza massima per evitare che diventino troppo larghe */
+    height: 200px;
+    margin: 10px 0;  /* Margine verticale tra le isole */
+    background-color: #e6d5b8;
+    border: 3px dashed #4b2e0e;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: #4b2e0e;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Evidenziazione delle isole durante il drag */
+.island.highlight {
+    background-color: rgba(67, 85, 67, 0.2);  /* Cambia il colore come desideri */
+    border: 2px dashed white;  /* Aggiungi un bordo per l'evidenziazione */
+}
+
+.island:hover {
+    background-color: #d9b77c;
+    transition: 0.3s;
+}

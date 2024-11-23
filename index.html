@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>One Piece Card Game -Home</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    
+    <h1>One Piece Card Game</h1>
+    <button onclick="startGame()">G1 VS G2</button>
+
+    <script>
+        function startGame() {
+            localStorage.clear();
+
+            window.location.href = 'selection.html';
+        }
+    </script>
 </body>
+
 </html>

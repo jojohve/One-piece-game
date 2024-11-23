@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Piece Card Game -Battle!</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/islands.css">
+</head>
+
+<body>
+    <div class="game-container">
+        <!-- Area per il turno e il controllo della battaglia -->
+        <div class="turn-info">
+            <h2>Turno: <span id="turn-number">0</span></h2>
+            <h3>Tocca a: <span id="current-player">Nessuno!</span></h3>
+        </div>
+
+        <h3>Team Giocatore 1</h3>
+        <div class="player-area" id="player1-deck">
+            <!-- Le carte del giocatore 1 verranno renderizzate qui -->
+        </div>
+        <button id="end-turn-1" class="disabled">Termina Turno Giocatore 1</button>
+
+        <h3>Isole</h3>
+        <div id="islands" class="islands">
+            <div class="island" id="">
+                <span class="island-name">Isola 1</span>
+                <!-- Le carte posizionate qui appariranno sotto -->
+            </div>
+            <div class="island" id="">
+                <span class="island-name">Isola 2</span>
+                <!-- Le carte posizionate qui appariranno sotto -->
+            </div>
+            <div class="island" id="">
+                <span class="island-name">Isola 3</span>
+                <!-- Le carte posizionate qui appariranno sotto -->
+            </div>
+            <div class="island" id="">
+                <span class="island-name">Isola 4</span>
+                <!-- Le carte posizionate qui appariranno sotto -->
+            </div>
+            <div class="island" id="">
+                <span class="island-name">Isola 5</span>
+                <!-- Le carte posizionate qui appariranno sotto -->
+            </div>
+            <div class="island" id="">
+                <span class="island-name">Isola 6</span>
+                <!-- Le carte posizionate qui appariranno sotto -->
+            </div>
+        </div>
+
+        <h3>Team Giocatore 2</h3>
+
+        <div class="player-area" id="player2-deck">
+            <!-- Le carte del giocatore 2 verranno renderizzate qui -->
+        </div>
+        <button id="end-turn-2" class="disabled">Termina Turno Giocatore 2</button>
+    </div>
+
+    <script type="module" src="js/islands.js"></script>
+    <script type="module" src="js/cards.js"></script>
+    <script type="module" src="js/drag.js"></script>
+    <script type="module" src="js/game.js"></script>
+    <script type="module" src="js/ui.js"></script>
+</body>
+
+</html>

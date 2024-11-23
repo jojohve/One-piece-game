@@ -1,4 +1,4 @@
-import { availableCards } from './card.js';
+import { availableCards } from './cards.js';
 
 let player1Cards = [];
 let player2Cards = [];
@@ -31,7 +31,7 @@ function selectCard(card, player) {
 
     // Se entrambi i giocatori hanno 6 carte, abilita il pulsante per iniziare la battaglia
     if (player1Cards.length === 6 && player2Cards.length === 6) {
-        document.getElementById('start-battle').disabled = false;
+        document.getElementById('start-battle').classList.remove('disabled');
     }
 }
 
@@ -117,19 +117,28 @@ function removeCard(card, player, index) {
     }
 
     // Se un giocatore ha meno di 6 carte, disabilita il pulsante per iniziare la battaglia
-    if (player1Cards.length < 6 || player2Cards.length < 6) {
-        document.getElementById('start-battle').disabled = true;
+    if (player1Cards.length === 6 && player2Cards.length === 6) {
+        document.getElementById('start-battle').classList.remove('disabled');
+        document.getElementById('start-battle').disabled = false;  // Assicurati che il pulsante sia abilitato
     }
 }
 
-// Funzione per gestire il pulsante "Inizia la Battaglia"
-document.getElementById('start-battle').addEventListener('click', () => {
-    // Salva i mazzi dei giocatori in localStorage
-    localStorage.setItem('player1Cards', JSON.stringify(player1Cards));
-    localStorage.setItem('player2Cards', JSON.stringify(player2Cards));
+// Funzione per salvare i mazzi (con tutte le carte) nel localStorage
+function saveDeckToStorage(player1Deck, player2Deck) {
+    // Salva le carte come array di oggetti nel localStorage
+    localStorage.setItem('player1Deck', JSON.stringify(player1Deck));
+    localStorage.setItem('player2Deck', JSON.stringify(player2Deck));
+}
 
-    // Reindirizza alla pagina della battaglia
-    window.location.href = 'battaglia.html';
+// Funzione per gestire il pulsante "Inizia la Battaglia"
+document.addEventListener('DOMContentLoaded', () => {
+    const startButton = document.getElementById('start-battle');
+    if (startButton) {
+        startButton.addEventListener('click', () => {
+            saveDeckToStorage(player1Deck, player2Deck);
+            window.location.href = 'game.html';
+        });
+    }
 });
 
 // Funzione per mostrare il messaggio di errore
@@ -145,5 +154,12 @@ function showErrorMessage(message) {
     }, 3000);
 }
 
-// Inizializza la visualizzazione
-displayAvailableCards();  // Mostra le carte disponibili per la selezione
+document.addEventListener('DOMContentLoaded', () => {
+    // Assicurati che l'elemento sia presente prima di chiamare displayAvailableCards
+    const availableCardsList = document.getElementById('available-cards');
+    if (availableCardsList) {
+        displayAvailableCards();  // Ora possiamo chiamare la funzione
+    } else {
+        console.error('Elemento con id "available-cards" non trovato!');
+    }
+});
