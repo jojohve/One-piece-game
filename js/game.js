@@ -3,6 +3,9 @@ import { displayBattleCards } from "./ui.js";
 
 let turnNumber = 0;
 let currentPlayer = 1;
+let hasMoved = false;
+let hasUsedSpecialMove = false; 
+let hasUsedHaki = false;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Recupera i mazzi dal localStorage
@@ -77,6 +80,30 @@ function testaOcroce() {
     }
 }
 
+export function getHasMoved() {
+    return hasMoved;
+}
+
+export function setHasMoved(value) {
+    hasMoved = value;
+}
+
+export function getHasUsedSpecialMove() {
+    return hasUsedSpecialMove;
+}
+
+export function setHasUsedSpecialMove(value) {
+    hasUsedSpecialMove = value;
+}
+
+export function getHasUsedHaki() {
+    return hasUsedHaki;
+}
+
+export function setHasUsedHaki(value) {
+    hasUsedHaki = value;
+}
+
 function Turn() {
     turnNumber++;
     console.log("Turno numero: " + turnNumber);
@@ -85,6 +112,8 @@ function Turn() {
     document.getElementById('current-player').innerText = 'Giocatore ' + currentPlayer;
     console.log(`Turno del Giocatore ${currentPlayer}`);
 
+    hasMoved = false;
+    hasUsedSpecialMove = false; // Resettiamo l'uso della mossa speciale a ogni turno
     toggleButtonsAndCards();
 }
 

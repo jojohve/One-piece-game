@@ -1,145 +1,148 @@
-import { updateCardPosition,updateCardDisplay } from './ui.js';
+import { updateCardPosition, updateCardDisplay } from './ui.js';
+import { getHasMoved, setHasMoved, getHasUsedSpecialMove, setHasUsedSpecialMove } from './game.js';
+import { useHaki, useSpecialMove } from './abilities.js';
 
-let lastSelectedCard = null; // Variabile globale per tenere traccia della carta selezionata
+let lastSelectedCard = null;
 
-// Funzione per iniziare il drag della carta
+// Inizializziamo le carte con la proprietà hasUsedHaki
+document.querySelectorAll('.card').forEach(card => {
+    card.cardData = card.cardData || {};
+    card.cardData.hasUsedHaki = false; // Imposta hasUsedHaki a false per ogni carta
+});
+
 export function dragStart(event) {
-    const cardId = event.target.id;  // Ottieni l'ID della carta
-    // Memorizza l'ID dell'elemento trascinato
+    if (getHasMoved()) {
+        event.preventDefault();
+        console.log("Hai già effettuato un movimento in questo turno.");
+        return;
+    }
+
+    const cardId = event.target.id; 
     event.dataTransfer.setData('text', event.target.id);
 
     console.log('Carta in drag:', cardId);
-    event.dataTransfer.setData("text", cardId);  // Trasferisci l'ID della carta
-    event.target.classList.add('dragging');  // Aggiunge una classe per evidenziare la carta
+    event.dataTransfer.setData("text", cardId);
+    event.target.classList.add('dragging'); 
 }
 
-// Funzione per rimuovere l'evidenza quando la carta esce dalla zona di destinazione
 function removeHighlight(event) {
     if (event.target.classList.contains('island')) {
         event.target.classList.remove('highlight');
     }
 }
 
-// Funzione per terminare il drag della carta
 export function dragEnd(event) {
-    event.target.classList.remove('dragging'); // Rimuove la classe che evidenziava la carta
+    event.target.classList.remove('dragging');
 }
 
-// Funzione per permettere il drop sulla zona di destinazione
 function allowDrop(event) {
-    event.preventDefault();  // Impedisce il comportamento predefinito del browser
-
+    event.preventDefault();
     if (event.target.classList.contains('island')) {
-        event.target.classList.add('highlight');  // Evidenzia la zona dove si può rilasciare la carta
+        event.target.classList.add('highlight'); 
     }
 }
 
-// Funzione per gestire il drop della carta nell'isola
 function drop(event) {
     event.preventDefault();
+    if (getHasMoved()) {
+        console.log("Hai già effettuato un movimento in questo turno.");
+        return;
+    }
 
-    const cardId = event.dataTransfer.getData("text"); // Ottieni l'ID della carta
+    const cardId = event.dataTransfer.getData("text");
     console.log(`ID carta ottenuto dal drop: ${cardId}`);
 
-    const island = event.target;  // L'elemento su cui stai "rilasciando" la carta
+    const island = event.target;
     if (!island.classList.contains('island')) {
         console.warn("Target non valido per il drop.");
         return;
     }
 
-    const islandId = island.id;  // Assicurati di ottenere l'ID dell'isola correttamente
+    const islandId = island.id; 
     console.log(`Isola target per il drop: ${islandId}`);
 
-    // Ora puoi aggiornare la posizione della carta
-    updateCardPosition(cardId, islandId);  // Usa l'islandId per aggiornare la posizione della carta
-
-    // Trova l'elemento DOM della carta e spostalo nell'isola
+    updateCardPosition(cardId, islandId);
     const cardElement = document.getElementById(cardId);
     island.appendChild(cardElement);
 
-    // Applica il boost se necessario
     const finalDamage = checkPreferredIslandAndBoostDamage(cardId, islandId);
     const cardName = cardElement.cardData?.name || "Carta sconosciuta";
     console.log(`Danno finale della mossa speciale per ${cardName}: ${finalDamage}`);
     
-    removeHighlight(event);  // Rimuovi evidenza di drop
+    setHasMoved(true); // Solo il movimento viene tracciato qui
+    removeHighlight(event);
 }
 
-// Aggiungi gli eventi ai membri delle carte
 document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('dragstart', dragStart);
     card.addEventListener('dragend', dragEnd);
 });
 
-// Aggiungi gli eventi di drag sulle isole
 document.querySelectorAll('.island').forEach(island => {
-    island.addEventListener('dragover', allowDrop); // Permette il drop
-    island.addEventListener('dragleave', removeHighlight); // Rimuove l'evidenza quando esci
-    island.addEventListener('drop', drop); // Gestisce il drop
+    island.addEventListener('dragover', allowDrop);
+    island.addEventListener('dragleave', removeHighlight);
+    island.addEventListener('drop', drop);
 });
 
-// Funzione per aumentare il danno se la carta è sulla sua isola preferita
 export function checkPreferredIslandAndBoostDamage(cardId, islandId) {
-    // Ottieni l'elemento DOM della carta
     const cardElement = document.getElementById(cardId);
     if (!cardElement || !cardElement.cardData) {
         console.warn(`Carta con ID ${cardId} non trovata o dati mancanti.`);
-        return 0; // Valore di default
+        return 0;
     }
 
-    const card = cardElement.cardData; // Recupera i dati della carta
+    const card = cardElement.cardData; 
 
     if (card.preferredIsland === islandId) {
         if (!card.boosted) {
-            card.specialMove.damage += 20; // Applica il boost
+            card.specialMove.damage += 20;
             card.boosted = true;
             console.log(`Boost applicato: ${card.name} ora ha ${card.specialMove.damage} danni.`);
         } else {
             console.log(`Boost già applicato a ${card.name}.`);
         }
     } else if (card.boosted) {
-        card.specialMove.damage -= 20; // Rimuovi il boost
+        card.specialMove.damage -= 20;
         card.boosted = false;
         console.log(`Boost rimosso: ${card.name} torna a ${card.specialMove.damage} danni.`);
     }
 
-    // Ritorna sempre il danno attuale della mossa speciale
-    updateCardDisplay(cardId); // Aggiorna la visualizzazione della carta
+    updateCardDisplay(cardId);
     return card.specialMove.damage;
 }
 
-// Funzione per selezionare una carta
 export function selectedCard(cardId, cardData) {
     const cardElement = document.getElementById(cardId);
 
-    // Verifica che l'evento di click non sia stato generato da un bottone
     if (event.target.classList.contains('haki-button') || event.target.classList.contains('special-move-button')) {
         console.log("Cliccato su un bottone, non selezionare la carta.");
-        return;  // Esci dalla funzione se è stato cliccato un bottone
+        return;
     }
 
-    // Se una carta è già selezionata, deselezionala
     if (lastSelectedCard && lastSelectedCard !== cardElement) {
         deselectCard(lastSelectedCard);
     }
 
-    // Aggiungi la classe 'selected' alla carta cliccata
     cardElement.classList.add('selected');
-    lastSelectedCard = cardElement;  // Memorizza la carta selezionata
+    lastSelectedCard = cardElement;
 
-    // Abilita i bottoni della carta selezionata
     const hakiButton = cardElement.querySelector('.haki-button');
     const specialMoveButton = cardElement.querySelector('.special-move-button');
     if (hakiButton) hakiButton.style.pointerEvents = 'auto';
     if (specialMoveButton) specialMoveButton.style.pointerEvents = 'auto';
 
-    console.log("Carta selezionata:", cardElement);
+    hakiButton.addEventListener('click', () => {
+        useHaki(cardId);
+    });
 
-    // Qui puoi anche usare cardData (se ti serve per altre operazioni)
+    specialMoveButton.addEventListener('click', () => {
+        useSpecialMove(cardId);
+    });
+
+    console.log("Carta selezionata:", cardElement);
     console.log("Dati della carta:", cardData);
 }
 
-// Funzione per deselezionare una carta
 export function deselectCard(cardElement) {
     cardElement.classList.remove('selected');
     const hakiButton = cardElement.querySelector('.haki-button');
@@ -148,7 +151,6 @@ export function deselectCard(cardElement) {
     if (specialMoveButton) specialMoveButton.style.pointerEvents = 'none';
 }
 
-// Aggiungi un event listener per deselezionare la carta quando si fa clic fuori
 document.addEventListener('click', (event) => {
     if (lastSelectedCard && !lastSelectedCard.contains(event.target)) {
         deselectCard(lastSelectedCard);
@@ -156,14 +158,12 @@ document.addEventListener('click', (event) => {
     }
 });
 
-// Aggiungi gli eventi di selezione per le carte (ad esempio, tramite un click)
 document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', (event) => {
         selectedCard(event.target.id, event.target.dataset.cardData);
     });
 });
 
-// Getter per ottenere l'ultima carta selezionata
 export function getLastSelectedCard() {
     return lastSelectedCard;
 }
