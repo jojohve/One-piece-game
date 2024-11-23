@@ -1,6 +1,5 @@
 import { assignIslandIDs } from "./islands.js";
-import { player1Deck, player2Deck } from "./selection.js";
-import {displayBattleCards} from "./ui.js";
+import { displayBattleCards } from "./ui.js";
 
 let turnNumber = 0;
 let currentPlayer = 1;
@@ -27,6 +26,9 @@ export function startGame(player1Deck, player2Deck) {
     // Imposta i mazzi globali
     window.player1Deck = player1Deck;
     window.player2Deck = player2Deck;
+
+    displayBattleCards(1, player1Deck);  // Mostra le carte del giocatore 1
+    displayBattleCards(2, player2Deck);  // Mostra le carte del giocatore 2
 
     // Log dei mazzi ora che sono definiti
     console.log('Mazzo del Giocatore 1:', window.player1Deck);
@@ -83,7 +85,7 @@ function Turn() {
     document.getElementById('current-player').innerText = 'Giocatore ' + currentPlayer;
     console.log(`Turno del Giocatore ${currentPlayer}`);
 
-    toggleButtons();
+    toggleButtonsAndCards();
 }
 
 function switchTurn() {
@@ -92,49 +94,27 @@ function switchTurn() {
     document.getElementById('current-player').innerText = `Giocatore ${currentPlayer}`;
 }
 
-function toggleButtons() {
-    // Abilita/disabilita i bottoni in base al giocatore corrente
+function toggleButtonsAndCards() {
     const button1 = document.getElementById('end-turn-1');
     const button2 = document.getElementById('end-turn-2');
-
+    const player1Cards = document.querySelectorAll(`[id^="battle-card-1-"]`);
+    const player2Cards = document.querySelectorAll(`[id^="battle-card-2-"]`);
     if (currentPlayer === 1) {
-        button1.classList.remove('disabled');
-        button1.disabled = false;
-
-        button2.classList.add('disabled');
-        button2.disabled = true;
-
-        // Oscura le carte del giocatore 2
-        player2Deck.forEach(card => {
-            card.classList.add('hidden');
-        });
-        
-        // Rimuove la classe 'hidden' dalle carte del giocatore 1
-        player1Deck.forEach(card => {
-            card.classList.remove('hidden');
-        });
+        button1.classList.remove('disabled'); button1.disabled = false;
+        button2.classList.add('disabled'); button2.disabled = true;
+        player1Cards.forEach(card => card.classList.remove('disabled'));
+        player2Cards.forEach(card => card.classList.add('disabled'));
     } else {
-        button1.classList.add('disabled');
-        button1.disabled = true;
-
-        button2.classList.remove('disabled');
-        button2.disabled = false;
-
-        // Oscura le carte del giocatore 1
-        player1Deck.forEach(card => {
-            card.classList.add('hidden');
-        });
-
-        // Rimuove la classe 'hidden' dalle carte del giocatore 2
-        player2Deck.forEach(card => {
-            card.classList.remove('hidden');
-        });
+        button1.classList.add('disabled'); button1.disabled = true;
+        button2.classList.remove('disabled'); button2.disabled = false;
+        player1Cards.forEach(card => card.classList.add('disabled'));
+        player2Cards.forEach(card => card.classList.remove('disabled'));
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     // Inizializza i bottoni in base al giocatore corrente
-    toggleButtons();
+    toggleButtonsAndCards();
 
     // Aggiungi eventi ai bottoni
     document.getElementById('end-turn-1').addEventListener('click', () => {

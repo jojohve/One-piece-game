@@ -29,9 +29,14 @@ function selectCard(card, player) {
         return;
     }
 
-    // Se entrambi i giocatori hanno 6 carte, abilita il pulsante per iniziare la battaglia
+    // Verifica se i mazzi sono pieni e aggiorna il pulsante
+    const startBattleButton = document.getElementById('start-battle');
     if (player1Cards.length === 6 && player2Cards.length === 6) {
-        document.getElementById('start-battle').classList.remove('disabled');
+        startBattleButton.classList.remove('disabled');
+        startBattleButton.disabled = false;  // Assicurati che il pulsante sia abilitato
+    } else {
+        startBattleButton.classList.add('disabled');
+        startBattleButton.disabled = true;  // Disabilita il pulsante se uno dei mazzi ha meno di 6 carte
     }
 }
 
@@ -115,12 +120,6 @@ function removeCard(card, player, index) {
         console.log(`Carta ${card.name} rimossa dal mazzo del giocatore 2`);
         displayCards(2);  // Rendi aggiornato il mazzo del giocatore 2
     }
-
-    // Se un giocatore ha meno di 6 carte, disabilita il pulsante per iniziare la battaglia
-    if (player1Cards.length === 6 && player2Cards.length === 6) {
-        document.getElementById('start-battle').classList.remove('disabled');
-        document.getElementById('start-battle').disabled = false;  // Assicurati che il pulsante sia abilitato
-    }
 }
 
 // Funzione per salvare i mazzi (con tutte le carte) nel localStorage
@@ -154,12 +153,5 @@ function showErrorMessage(message) {
     }, 3000);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Assicurati che l'elemento sia presente prima di chiamare displayAvailableCards
-    const availableCardsList = document.getElementById('available-cards');
-    if (availableCardsList) {
-        displayAvailableCards();  // Ora possiamo chiamare la funzione
-    } else {
-        console.error('Elemento con id "available-cards" non trovato!');
-    }
-});
+// Inizializza la visualizzazione
+displayAvailableCards();  // Mostra le carte disponibili per la selezione

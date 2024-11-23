@@ -3,6 +3,10 @@ import { dragStart, dragEnd, selectedCard } from './drag.js';
 // Funzione per visualizzare le carte in battaglia
 export function displayBattleCards(player, playerDeck) {
     const playerArea = document.getElementById(`player${player}-deck`);
+    if (!playerArea) {
+        console.error(`Elemento con id 'player${player}-deck' non trovato.`);
+        return; // Se non trovato, esce dalla funzione
+    }
     playerArea.innerHTML = ''; // Svuota la zona prima di aggiungere nuove carte
 
     playerDeck.forEach((card, index) => {
@@ -108,13 +112,4 @@ export function updateCardDisplay(cardId) {
 window.onload = () => {
     const player1Deck = JSON.parse(localStorage.getItem('player1Deck')) || [];
     const player2Deck = JSON.parse(localStorage.getItem('player2Deck')) || [];
-
-    // Verifica se i mazzi sono validi
-    if (player1Deck.length > 0 && player2Deck.length > 0) {
-        // Mostra le carte dei giocatori
-        displayBattleCards(1, player1Deck);
-        displayBattleCards(2, player2Deck);
-    } else {
-        console.error('Mazzi non trovati o vuoti.');
-    }
 };
