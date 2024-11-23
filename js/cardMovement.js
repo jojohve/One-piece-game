@@ -6,6 +6,8 @@ let lastSelectedCard = null; // Variabile globale per tenere traccia della carta
 // Funzione per iniziare il drag della carta
 export function dragStart(event) {
     const cardId = event.target.id;  // Ottieni l'ID della carta
+    azionePerTurno(cardId);
+
     // Memorizza l'ID dell'elemento trascinato
     event.dataTransfer.setData('text', event.target.id);
 
@@ -22,6 +24,7 @@ export function dragEnd(event) {
 // Funzione per permettere il drop sulla zona di destinazione
 function allowDrop(event) {
     event.preventDefault();  // Impedisce il comportamento predefinito del browser
+
     if (event.target.classList.contains('island')) {
         event.target.classList.add('highlight');  // Evidenzia la zona dove si può rilasciare la carta
     }
@@ -40,7 +43,6 @@ function drop(event) {
 
     const cardId = event.dataTransfer.getData("text"); // Ottieni l'ID della carta
     console.log(`ID carta ottenuto dal drop: ${cardId}`);
-    azionePerTurno(cardId);
 
     const island = event.target;  // L'elemento su cui stai "rilasciando" la carta
     if (!island.classList.contains('island')) {

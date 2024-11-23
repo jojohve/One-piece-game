@@ -1,7 +1,6 @@
 import { turnRules } from './rules.js';
-import { switchTurn } from './rules.js';
 
-export function resetActions() {
+export function resetPlayerActions() {
     // Resetta le azioni per entrambi i giocatori
     player1Actions.hasDropped = false;
     player1Actions.hasUsedSpecialMove = false;
@@ -10,7 +9,7 @@ export function resetActions() {
 }
 
 // Disabilita le carte di un giocatore
-function disableCards(player) {
+function disableCards(_opponentPlayer) {
     const cards = document.querySelectorAll(`.card-${player}`);
     cards.forEach(card => {
         card.classList.add('disabled');
@@ -18,7 +17,7 @@ function disableCards(player) {
 }
 
 // Abilita le carte di un giocatore
-function enableCards(player) {
+function enableCards(_currentPlayer) {
     const cards = document.querySelectorAll(`.card-${player}`);
     cards.forEach(card => {
         card.classList.remove('disabled');
@@ -26,29 +25,34 @@ function enableCards(player) {
 }
 
 export function updateTurn() {
-    turnNumber++; // Incrementa il numero di turno
+    turnNumber++;
+    console.log("Turno numero: " + turnNumber);
+    document.getElementById('turn-number').innerText = turnNumber;
 
     // Resetta le azioni per il giocatore attuale
-    resetPlayerActions();
+    if (turnRules.currentPlayer === 1) {
+        player1Actions.hasDropped = false;
+        player1Actions.hasUsedSpecialMove = false;
+    } else {
+        player2Actions.hasDropped = false;
+        player2Actions.hasUsedSpecialMove = false;
+    }
 
-    // Cambia il giocatore attuale
+    // Passa al prossimo giocatore
     turnRules.currentPlayer = turnRules.currentPlayer === 1 ? 2 : 1;
+    document.getElementById('current-player').innerText = currentPlayer;
+    console.log(`Turno del Giocatore ${currentPlayer}`);
+
+    // Abilita le carte del giocatore attivo
+    enableCards(turnRules.currentPlayer);
 
     // Disabilita le carte del giocatore non attivo
     const opponentPlayer = turnRules.currentPlayer === 1 ? 2 : 1;
     disableCards(opponentPlayer);
 
-    // Abilita le carte del giocatore attivo
-    enableCards(turnRules.currentPlayer);
-
     // Disabilita i bottoni di fine turno
     document.getElementById('end-turn-1').disabled = turnRules.currentPlayer !== 1;
     document.getElementById('end-turn-2').disabled = turnRules.currentPlayer !== 2;
-
-    console.log(`Turno del Giocatore ${turnRules.currentPlayer}`);
-
-    // Salva lo stato del gioco
-    saveGameState();
 }
 
 export function checkForWinner() {

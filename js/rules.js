@@ -83,17 +83,19 @@ export let player2Actions = {
 };
 
 export function azionePerTurno(cardId) {
-    const currentPlayer = turnRules.currentPlayer;
+    const currentPlayer = turnRules.currentPlayer; // Ottiene il giocatore attuale
     const currentPlayerActions = currentPlayer === 1 ? player1Actions : player2Actions;
 
     if (currentPlayerActions.hasDropped) {
-        console.log("Hai già effettuato un'azione in questo turno!");
-        return false; 
+        console.log("Hai già spostato una carta in questo turno! Aspetta il prossimo turno.");
+        return false; // Impedisce ulteriori spostamenti
     }
 
-    console.log(`La carta con ID ${cardId} è stata spostata.`);
-    currentPlayerActions.hasDropped = true;
-    return true; 
+    // Logica per spostare la carta
+    console.log(`La carta con ID ${cardId} è stata spostata con successo.`);
+    currentPlayerActions.hasDropped = true; // Registra che l'azione è stata eseguita
+
+    return true; // Conferma l'azione
 }
 
 export function mossaPerTurno(cardId) {
@@ -105,6 +107,7 @@ export function mossaPerTurno(cardId) {
         return false; 
     }
 
+    checkForOpponentCardsOnSameIsland();
     console.log(`La carta con ID ${cardId} ha usato la mossa speciale!`);
     currentPlayerActions.hasUsedSpecialMove = true;
     return true; 

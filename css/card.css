@@ -62,7 +62,7 @@
 .card-list {
     display: flex;
     margin-bottom: 100px;
-    height: 400px;
+    height: 300px;
     overflow-x: scroll;
     gap: 5px;
 }
@@ -100,7 +100,7 @@
     opacity: 1; /* Restituisce la visibilità normale */
 }
 
-.card.disabled {
+.disabled {
     opacity: 0.5; /* Cambia l'opacità della carta disabilitata */
     pointer-events: none; /* Impedisce ulteriori clic sulla carta */
 }
