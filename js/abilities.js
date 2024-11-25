@@ -1,37 +1,61 @@
+import {updateCardDisplay} from './ui.js';
 import { getHasUsedSpecialMove, setHasUsedSpecialMove, currentPlayer } from './game.js';
-import { updateCardDisplay } from './ui.js';
 
 // Funzione per usare Haki
 export function useHaki(cardId) {
     const cardElement = document.getElementById(cardId);
     const cardData = cardElement.cardData;
+
     if (!cardData.hasUsedHaki) {
         switch (cardData.haki) {
             case 'Armatura':
-                cardData.hp += 30; // Aggiunge 30 HP alla carta 
-                console.log(`Haki dell'Armatura usato da ${cardData.name}: +30 HP, HP totali: ${cardData.hp}`);
+                cardData.hp += 30; // Aumenta gli HP della carta che utilizza Haki dell'Armatura
+                console.log("Haki dell'Armatura usato da:", cardElement);
+                // Aggiorna la visualizzazione della carta corrente
+                const currentCardId = `battle-card-${cardData.player}-${cardData.id}`;
+                updateCardDisplay(currentCardId);
                 break;
             case 'Osservazione':
-                console.log(`Haki dell'Osservazione usato da ${cardData.name}. Da approfondire.`);
+                console.log("Haki dell'Osservazione usato da:", cardElement);
                 break;
             case 'Conquistatore':
+                // Recupera i mazzi dei giocatori
                 const playerDeckKey = `player${cardData.player}Deck`;
                 const playerDeck = JSON.parse(localStorage.getItem(playerDeckKey)) || [];
-                playerDeck.forEach(card => {
-                    card.hp += 10; // Aggiunge 10 HP a tutte le carte alleate 
-                    console.log(`Haki del Conquistatore usato: +10 HP a ${card.name}, HP totali: ${card.hp}`); // Aggiorna il DOM per ciascuna carta alleata 
-                    const allyCardId = `battle-card-${cardData.player}-${card.id}`;
-                    updateCardDisplay(allyCardId);
+
+                playerDeck.forEach((allyCard) => {
+                    allyCard.hp += 5; // Aumenta gli HP di tutte le carte alleate
+                    const allyCardId = `battle-card-${cardData.player}-${allyCard.id}`;
+                    const allyCardElement = document.getElementById(allyCardId);
+                    if (allyCardElement) {
+                        allyCardElement.cardData = allyCard;
+
+                        // Aggiorna i campi specifici della carta alleata
+                        allyCardElement.innerHTML = `
+                            <span>${allyCard.name}</span><br>
+                            HP: ${allyCard.hp}<br>
+                            Haki: ${allyCard.haki}<br>
+                            Mossa: ${allyCard.specialMove.name}<br>
+                            Danno: ${allyCard.specialMove.damage}<br>
+                            Isola: ${allyCard.preferredIsland}<br>
+                            Frutto: ${allyCard.fruitType}
+                            <div class="card-actions">
+                                <button class="haki-button">Usa Haki</button>
+                                <button class="special-move-button">Usa Mossa Speciale</button>
+                            </div>
+                        `;
+                        console.log(`Visualizzazione aggiornata per la carta ${allyCard.name} con ID ${allyCardId}`);
+                    }
                 });
-                localStorage.setItem(playerDeckKey, JSON.stringify(playerDeck)); // Aggiorna il mazzo nel localStorage 
+
+                // Aggiorna il mazzo nel localStorage
+                localStorage.setItem(playerDeckKey, JSON.stringify(playerDeck));
                 break;
             default:
-                console.warn(`Tipo di Haki sconosciuto: ${cardData.haki}`);
-                break;
+                console.warn(`Tipo di Haki non riconosciuto: ${cardData.haki}`);
         }
+
         cardData.hasUsedHaki = true;
-        localStorage.setItem(`player${cardData.player}Deck`, JSON.stringify(window[`player${cardData.player}Deck`]));
-        updateCardDisplay(cardId); // Aggiorna il DOM della carta che ha usato Haki
         cardElement.querySelector('.haki-button').style.pointerEvents = 'none';
     } else {
         console.log("Haki già usato per questa carta.");
@@ -66,8 +90,8 @@ export function useSpecialMove(cardId) {
                 const enemyCardId = `battle-card-${oppositePlayer}-${enemyCard.id}`;
                 const enemyCardElement = document.getElementById(enemyCardId);
 
-                // Aggiorna i dati della carta nemica
                 if (enemyCardElement) {
+                    // Aggiorna i dati della carta nemica
                     enemyCardElement.cardData = enemyCard;
 
                     // Aggiorna i campi specifici della carta nemica
@@ -89,7 +113,6 @@ export function useSpecialMove(cardId) {
                     console.warn(`Elemento DOM della carta con ID ${enemyCardId} non trovato.`);
                 }
 
-                // Rimuovi la carta dal mazzo e dal DOM se gli HP sono pari a zero
                 if (enemyCard.hp <= 0) {
                     alert(`${enemyCard.name} è stato sconfitto!`);
                     enemyDeck.splice(index, 1);

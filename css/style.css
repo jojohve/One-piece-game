@@ -103,3 +103,36 @@ button.disabled {
     cursor: not-allowed;
     /* Cambia il cursore per indicare che è disabilitato */
 }
+
+@media (max-width: 600px) {
+    body {
+        font-size: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    #player1-cards,
+    #player2-cards,
+    #player1-deck,
+    #player2-deck {
+        overflow-x: scroll;
+        align-items: center;
+        padding: 10px;
+        margin: 10px;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+
+    .turn-info {
+        margin: 0 20px;
+    }
+}
