@@ -1,5 +1,5 @@
 import { updateCardPosition, updateCardDisplay } from './ui.js';
-import { getHasMoved, setHasMoved, getHasUsedSpecialMove, setHasUsedSpecialMove } from './game.js';
+import { getHasMoved, setHasMoved, currentPlayer, getHasUsedSpecialMove, setHasUsedSpecialMove } from './game.js';
 import { useHaki, useSpecialMove } from './abilities.js';
 
 let lastSelectedCard = null;

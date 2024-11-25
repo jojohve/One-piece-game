@@ -1,4 +1,5 @@
 import { dragStart, dragEnd, selectedCard } from './drag.js';
+import { useHaki, useSpecialMove } from './abilities.js';
 
 // Funzione per visualizzare le carte in battaglia
 export function displayBattleCards(player, playerDeck) {
@@ -12,7 +13,7 @@ export function displayBattleCards(player, playerDeck) {
     playerDeck.forEach((card, index) => {
         const cardElement = document.createElement('div');
         cardElement.classList.add('card');
-        const cardId = `battle-card-${player}-${index}`;
+        const cardId = `battle-card-${player}-${card.id}`; // Usa l'ID univoco della carta
         cardElement.setAttribute('id', cardId);
         cardElement.setAttribute('draggable', 'true');
 
@@ -58,37 +59,54 @@ export function displayBattleCards(player, playerDeck) {
 
 // Funzione per aggiornare la posizione della carta
 export function updateCardPosition(cardId, islandId) {
-    console.log(`Aggiorno la posizione della carta ${cardId} sull'isola ${islandId}`);
-
-    // Recupera l'elemento DOM della carta per ottenere i dettagli
     const cardElement = document.getElementById(cardId);
-    if (!cardElement) {
-        console.error(`Elemento DOM per la carta con ID ${cardId} non trovato.`);
-        return;
-    }
+    if (cardElement) {
+        const cardData = cardElement.cardData;
+        cardData.currentPosition = islandId;
+        console.log(`Posizione aggiornata per ${cardData.name}: ${islandId}`);
 
-    // Aggiorna la posizione corrente (currentPosition) usando direttamente il riferimento della carta droppata
-    const cardData = cardElement.cardData; // cardData è un attributo associato all'elemento DOM
-    if (!cardData) {
-        console.error(`Nessun dato associato alla carta con ID ${cardId}.`);
-        return;
+        // Aggiorna il mazzo nel localStorage
+        const playerDeckKey = `player${cardData.player}Deck`;
+        const playerDeck = JSON.parse(localStorage.getItem(playerDeckKey)) || [];
+        const cardIndex = playerDeck.findIndex(c => `battle-card-${c.player}-${c.id}` === cardId); // Usa ID coerente
+        if (cardIndex !== -1) {
+            playerDeck[cardIndex].currentPosition = islandId;
+            localStorage.setItem(playerDeckKey, JSON.stringify(playerDeck));
+        } else {
+            console.warn(`Carta con ID ${cardId} non trovata nel mazzo.`); // Usa cardId per il log
+        }
+    } else {
+        console.warn(`Carta con ID ${cardId} non trovata.`);
     }
-
-    cardData.currentPosition = islandId; // Aggiorniamo solo currentPosition
-    console.log(`Posizione corrente della carta aggiornata a: ${islandId}`);
 }
 
 // Funzione per aggiornare la visualizzazione di una carta
 export function updateCardDisplay(cardId) {
     // Trova l'elemento DOM della carta
     const cardElement = document.getElementById(cardId);
-    if (!cardElement || !cardElement.cardData) {
-        console.warn(`Elemento DOM o dati della carta con ID ${cardId} non trovati.`);
+    if (!cardElement) {
+        console.warn(`Elemento DOM della carta con ID ${cardId} non trovato.`);
         return;
     }
 
     // Recupera i dati della carta
-    const cardData = cardElement.cardData;
+    let cardData = cardElement.cardData;
+
+    // Se cardData non è disponibile, proviamo a recuperarlo dal localStorage
+    if (!cardData) {
+        const player1Deck = JSON.parse(localStorage.getItem('player1Deck')) || [];
+        const player2Deck = JSON.parse(localStorage.getItem('player2Deck')) || [];
+        const allDecks = player1Deck.concat(player2Deck);
+        const card = allDecks.find(c => `battle-card-${c.player}-${c.id}` === cardId);
+
+        if (card) {
+            cardData = card;
+            cardElement.cardData = cardData; // Memorizza cardData nell'elemento
+        } else {
+            console.warn(`Dati della carta con ID ${cardId} non trovati.`);
+            return;
+        }
+    }
 
     // Aggiorna i campi specifici della carta
     cardElement.innerHTML = `
@@ -112,4 +130,6 @@ export function updateCardDisplay(cardId) {
 window.onload = () => {
     const player1Deck = JSON.parse(localStorage.getItem('player1Deck')) || [];
     const player2Deck = JSON.parse(localStorage.getItem('player2Deck')) || [];
-};
+    displayBattleCards(1, player1Deck);
+    displayBattleCards(2, player2Deck);
+}

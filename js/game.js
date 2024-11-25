@@ -2,7 +2,7 @@ import { assignIslandIDs } from "./islands.js";
 import { displayBattleCards } from "./ui.js";
 
 let turnNumber = 0;
-let currentPlayer = 1;
+export let currentPlayer = 1;
 let hasMoved = false;
 let hasUsedSpecialMove = false; 
 let hasUsedHaki = false;

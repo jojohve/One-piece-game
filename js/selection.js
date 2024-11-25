@@ -124,7 +124,17 @@ function removeCard(card, player, index) {
 
 // Funzione per salvare i mazzi (con tutte le carte) nel localStorage
 function saveDeckToStorage(player1Deck, player2Deck) {
-    // Salva le carte come array di oggetti nel localStorage
+    player1Deck.forEach((card, index) => {
+        card.player = 1;
+        card.currentPosition = card.currentPosition || 'inizio'; // Imposta una posizione iniziale se non presente
+        card.id = `card-available-${index}`; // Assicurati che l'ID sia coerente
+    });
+    player2Deck.forEach((card, index) => {
+        card.player = 2;
+        card.currentPosition = card.currentPosition || 'inizio'; // Imposta una posizione iniziale se non presente
+        card.id = `card-available-${index}`; // Assicurati che l'ID sia coerente
+    });
+
     localStorage.setItem('player1Deck', JSON.stringify(player1Deck));
     localStorage.setItem('player2Deck', JSON.stringify(player2Deck));
 }
