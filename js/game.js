@@ -4,7 +4,7 @@ import { displayBattleCards } from "./ui.js";
 let turnNumber = 0;
 export let currentPlayer = 1;
 let hasMoved = false;
-let hasUsedSpecialMove = false; 
+let hasUsedSpecialMove = false;
 let hasUsedHaki = false;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // Inizializza il gioco solo dopo aver recuperato i mazzi
     startGame(player1Deck, player2Deck);
+    checkForWinner();
 });
 
 // Funzione per avviare il gioco
@@ -160,10 +161,10 @@ document.addEventListener('DOMContentLoaded', () => {
 export function checkForWinner() {
     // Verifica se un giocatore ha vinto
     if (player1Deck.length === 0) {
-        console.log("Giocatore 2 vince!");
+        alert("Giocatore 2 vince!");
         showEndGameButton();
     } else if (player2Deck.length === 0) {
-        console.log("Giocatore 1 vince!");
+        alert("Giocatore 1 vince!");
         showEndGameButton();
     }
 }
@@ -183,4 +184,28 @@ function showEndGameButton() {
         resetGame(); // Reset del gioco
         window.location.href = "index.html"; // Torna alla pagina principale
     });
+}
+
+// Funzione per resettare il gioco
+function resetGame() {
+    // Resetta variabili di stato del gioco
+    turnNumber = 0;
+    currentPlayer = 1;
+    hasMoved = false;
+    hasUsedSpecialMove = false;
+    hasUsedHaki = false;
+
+    // Rimuovi le carte dai deck
+    window.player1Deck = [];
+    window.player2Deck = [];
+    localStorage.setItem('player1Deck', JSON.stringify([]));
+    localStorage.setItem('player2Deck', JSON.stringify([]));
+
+    // Rimuovi le carte dal DOM
+    const player1Area = document.getElementById('player1-deck');
+    const player2Area = document.getElementById('player2-deck');
+    if (player1Area) player1Area.innerHTML = '';
+    if (player2Area) player2Area.innerHTML = '';
+
+    console.log('Gioco resettato.');
 }

@@ -84,18 +84,22 @@ button.disabled {
 .turn-info {
     background-color: #5a3d1956;
     background-size: cover;
-    background-position: center; 
+    background-position: center;
     margin: 0px 100px;
     border-radius: 25px;
 }
 
-.end-turn {
+#end-turn-1,
+#end-turn-2 {
     font-size: smaller;
     margin-bottom: 20px;
 }
 
 .disabled {
-    pointer-events: none; /* Disabilita clic e interazioni */
-    opacity: 0.5;        /* Riduce l'opacità per indicare che è disabilitato */
-    cursor: not-allowed; /* Cambia il cursore per indicare che è disabilitato */
+    pointer-events: none;
+    /* Disabilita clic e interazioni */
+    opacity: 0.5;
+    /* Riduce l'opacità per indicare che è disabilitato */
+    cursor: not-allowed;
+    /* Cambia il cursore per indicare che è disabilitato */
 }
