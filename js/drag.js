@@ -13,7 +13,7 @@ document.querySelectorAll('.card').forEach(card => {
 export function dragStart(event) {
     if (getHasMoved()) {
         event.preventDefault();
-        console.log("Hai già effettuato un movimento in questo turno.");
+        alert("Hai già effettuato un movimento in questo turno.");
         return;
     }
 
@@ -97,7 +97,7 @@ export function checkPreferredIslandAndBoostDamage(cardId, islandId) {
         if (!card.boosted) {
             card.specialMove.damage += 20;
             card.boosted = true;
-            console.log(`Boost applicato: ${card.name} ora ha ${card.specialMove.damage} danni.`);
+            alert(`Boost applicato: ${card.name} ora ha ${card.specialMove.damage} danni.`);
         } else {
             console.log(`Boost già applicato a ${card.name}.`);
         }

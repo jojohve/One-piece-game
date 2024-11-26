@@ -40,6 +40,25 @@ function selectCard(card, player) {
     }
 }
 
+// Funzione per selezionare una carta casuale
+function selectRandomCard(player) {
+    // Filtra le carte disponibili che non sono ancora state selezionate dal giocatore
+    const availableForPlayer = availableCards.filter(card => 
+        (player === 1 && !player1Cards.includes(card)) || 
+        (player === 2 && !player2Cards.includes(card))
+    );
+
+    if (availableForPlayer.length === 0) {
+        showErrorMessage(`Non ci sono più carte disponibili per il giocatore ${player}`);
+        return;
+    }
+
+    const randomIndex = Math.floor(Math.random() * availableForPlayer.length);
+    const randomCard = availableForPlayer[randomIndex];
+
+    selectCard(randomCard, player);
+}
+
 // Funzione per visualizzare tutte le carte disponibili per la selezione
 function displayAvailableCards() {
     const availableCardsList = document.getElementById('available-cards');
@@ -148,6 +167,14 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'game.html';
         });
     }
+
+    // Aggiungi eventi per i pulsanti di selezione casuale
+    const randomButtonPlayer1 = document.getElementById('random-button-player1');
+    const randomButtonPlayer2 = document.getElementById('random-button-player2');
+    if (randomButtonPlayer1 && randomButtonPlayer2) {
+        randomButtonPlayer1.addEventListener('click', () => selectRandomCard(1));
+        randomButtonPlayer2.addEventListener('click', () => selectRandomCard(2));
+    }
 });
 
 // Funzione per mostrare il messaggio di errore
@@ -164,4 +191,4 @@ function showErrorMessage(message) {
 }
 
 // Inizializza la visualizzazione
-displayAvailableCards();  // Mostra le carte disponibili per la selezione
+displayAvailableCards();

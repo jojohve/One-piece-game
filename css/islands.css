@@ -2,28 +2,22 @@
 .islands {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* Due colonne con larghezza uguale */
     gap: 50px;
-    /* Spaziatura tra le isole */
     justify-items: center;
-    /* Centra le isole all'interno delle colonne */
     margin: 20px auto;
-    /* Imposta un margine per centrare la griglia */
 }
 
 /* Stile per ogni isola */
 .island {
     width: 100%;
-    /* Le isole occupano tutta la larghezza della colonna */
     max-width: 600px;
-    /* Imposta una larghezza massima per evitare che diventino troppo larghe */
     height: 200px;
     margin: 10px 0;
-    /* Margine verticale tra le isole */
     background-color: #e6d5b8;
     border: 3px dashed #4b2e0e;
     border-radius: 15px;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
@@ -33,12 +27,30 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
+.island-name {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Contenitore per i pallini delle vite */
+.island-lives {
+    display: flex;
+    gap: 10px;
+}
+
+/* Stile per i pallini delle vite */
+.life-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: gray;
+    border: 2px solid #4b2e0e;
+}
+
 /* Evidenziazione delle isole durante il drag */
 .island.highlight {
     background-color: rgba(67, 85, 67, 0.2);
-    /* Cambia il colore come desideri */
     border: 2px dashed white;
-    /* Aggiungi un bordo per l'evidenziazione */
 }
 
 .island:hover {
@@ -49,16 +61,16 @@
 @media (max-width: 600px) {
     .islands {
         grid-template-columns: 1fr;
-        /* Colonna singola per mobile */
         gap: 20px;
-        /* Riduci la spaziatura tra le isole */
     }
 
     .island {
         height: auto;
-        /* Permetti alle isole di adattarsi al contenuto */
         padding: 20px;
         font-size: 0.875rem;
-        /* Riduci leggermente la dimensione del font */
+    }
+
+    .island-lives {
+        justify-content: center;
     }
 }

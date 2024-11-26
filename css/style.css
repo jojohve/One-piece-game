@@ -23,6 +23,18 @@ h2 {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
+.red {
+    color: red;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.blue {
+    color: blue;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
 /* Container delle carte */
 #player1-cards,
 #player2-cards,

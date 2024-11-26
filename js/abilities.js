@@ -1,5 +1,6 @@
-import {updateCardDisplay} from './ui.js';
+import { updateCardDisplay } from './ui.js';
 import { getHasUsedSpecialMove, setHasUsedSpecialMove, currentPlayer } from './game.js';
+import { updateIslandLives } from './islands.js';
 
 // Funzione per usare Haki
 export function useHaki(cardId) {
@@ -40,7 +41,7 @@ export function useHaki(cardId) {
                             Isola: ${allyCard.preferredIsland}<br>
                             Frutto: ${allyCard.fruitType}
                             <div class="card-actions">
-                                <button class="haki-button">Usa Haki</button>
+                                <button class="haki-button" ${allyCard.hasUsedHaki ? 'disabled' : ''}>Usa Haki</button>
                                 <button class="special-move-button">Usa Mossa Speciale</button>
                             </div>
                         `;
@@ -50,13 +51,18 @@ export function useHaki(cardId) {
 
                 // Aggiorna il mazzo nel localStorage
                 localStorage.setItem(playerDeckKey, JSON.stringify(playerDeck));
+
+                // Aggiorna le vite dell'isola
+                updateIslandLives(cardData.currentPosition, `conqueror-${cardData.player}`);
                 break;
             default:
                 console.warn(`Tipo di Haki non riconosciuto: ${cardData.haki}`);
         }
 
         cardData.hasUsedHaki = true;
-        cardElement.querySelector('.haki-button').style.pointerEvents = 'none';
+        const hakiButton = cardElement.querySelector('.haki-button');
+        hakiButton.style.pointerEvents = 'none';
+        hakiButton.classList.add('disabled'); // Aggiungi una classe CSS per lo stile del pulsante disabilitato
     } else {
         console.log("Haki già usato per questa carta.");
     }
@@ -104,7 +110,7 @@ export function useSpecialMove(cardId) {
                         Isola: ${enemyCard.preferredIsland}<br>
                         Frutto: ${enemyCard.fruitType}
                         <div class="card-actions">
-                            <button class="haki-button">Usa Haki</button>
+                            <button class="haki-button" ${enemyCard.hasUsedHaki ? 'disabled' : ''}>Usa Haki</button>
                             <button class="special-move-button">Usa Mossa Speciale</button>
                         </div>
                     `;
@@ -114,6 +120,9 @@ export function useSpecialMove(cardId) {
                 }
 
                 if (enemyCard.hp <= 0) {
+                    // Aggiorna le vite dell'isola
+                    updateIslandLives(currentPosition, `kill-${currentPlayer}`);
+                    
                     alert(`${enemyCard.name} è stato sconfitto!`);
                     enemyDeck.splice(index, 1);
                     localStorage.setItem(`player${oppositePlayer}Deck`, JSON.stringify(enemyDeck));
@@ -140,6 +149,6 @@ export function useSpecialMove(cardId) {
         setHasUsedSpecialMove(true);
         cardElement.querySelector('.special-move-button').style.pointerEvents = 'none';
     } else {
-        console.log("Mossa speciale già usata in questo turno.");
+        alert("Mossa speciale già usata in questo turno.");
     }
 }

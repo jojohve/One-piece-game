@@ -70,7 +70,7 @@ function testaOcroce() {
     // Imposta il giocatore corrente
     currentPlayer = coinFlip === 'testa' ? 1 : 2;
 
-    console.log(`Giocatore ${currentPlayer} inizia!`);
+    alert(`Giocatore ${currentPlayer} inizia!`);
 
     // Recupera l'elemento DOM dove deve essere mostrato il giocatore corrente
     const currentPlayerElement = document.getElementById('current-player');
@@ -111,7 +111,7 @@ function Turn() {
     document.getElementById('turn-number').innerText = turnNumber;
 
     document.getElementById('current-player').innerText = 'Giocatore ' + currentPlayer;
-    console.log(`Turno del Giocatore ${currentPlayer}`);
+    alert(`Turno del Giocatore ${currentPlayer}`);
 
     hasMoved = false;
     hasUsedSpecialMove = false; // Resettiamo l'uso della mossa speciale a ogni turno
@@ -207,5 +207,5 @@ function resetGame() {
     if (player1Area) player1Area.innerHTML = '';
     if (player2Area) player2Area.innerHTML = '';
 
-    console.log('Gioco resettato.');
+    alert('Gioco resettato.');
 }
