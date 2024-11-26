@@ -10,7 +10,7 @@
 /* Stile per ogni isola */
 .island {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     height: 200px;
     margin: 10px 0;
     background-color: #e6d5b8;
