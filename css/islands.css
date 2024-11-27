@@ -13,7 +13,7 @@
     max-width: 800px;
     height: 200px;
     margin: 10px 0;
-    background-color: #e6d5b8;
+    background:url(/assets/grass-855890_1280.jpg);
     border: 3px dashed #4b2e0e;
     border-radius: 15px;
     display: flex;
@@ -21,7 +21,7 @@
     justify-content: center;
     align-items: center;
     font-size: 1rem;
-    color: #4b2e0e;
+    color: #eeeeee;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -54,7 +54,7 @@
 }
 
 .island:hover {
-    background-color: #d9b77c;
+    border: 2px dashed white;
     transition: 0.3s;
 }
 

@@ -102,9 +102,10 @@
 .card-list {
     display: flex;
     margin-bottom: 100px;
-    height: 350px;
+    height: 400px;
     overflow-x: scroll;
     gap: 10px;
+    background: url(/assets/wood-2045380_1280.jpg);
 }
 
 .card-actions {
@@ -170,8 +171,8 @@
         /* Riduci leggermente la dimensione del titolo */
     }
 
-    .card p {
-        font-size: 0.8rem;
+    .card span.damage, span.preferredIsland, span.fruitType {
+        font-size: 0.7rem;
         /* Riduci leggermente la dimensione del testo */
     }
 
@@ -182,6 +183,6 @@
 
     .card .haki-button,
     .card .special-move-button {
-        font-size: 12px;
+        font-size: 10px;
     }
 }

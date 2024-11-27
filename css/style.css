@@ -2,25 +2,34 @@
 body {
     font-family: 'Pirata One', cursive;
     /* Usa un font a tema pirati */
-    background-color: #f4e4c1;
+    background: radial-gradient(circle, hsla(41, 70%, 86%, 1) 0%, hsla(41, 30%, 68%, 1) 100%);
     color: #4b2e0e;
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
+.game-container {
+    background: url(/assets/aesthetic-blue-watercolor-background-abstract-style.jpg);
+}
+
 /* Titoli principali */
 h1 {
     font-size: 3rem;
     margin-top: 20px;
-    color: #4b2e0e;
+    color: #eeeeee;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 h2 {
     font-size: 2rem;
-    color: #5a3d19;
+    color: #eeeeee;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+#current-player,
+h3 {
+    color: #eeeeee;
 }
 
 .red {
@@ -44,7 +53,8 @@ h2 {
     justify-content: center;
     gap: 5px;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background: url(/assets/wood-2045380_1280.jpg);
+    ;
     border: 2px solid #4b2e0e;
     border-radius: 15px;
     margin: 20px;
@@ -180,7 +190,11 @@ button.disabled {
     perspective: 1000px;
 }
 
-.carousel-item span.haki , span.damage , span.fruitType , span.preferredIsland , span.specialMove {
+.carousel-item span.haki,
+span.damage,
+span.fruitType,
+span.preferredIsland,
+span.specialMove {
     display: flex;
     color: rgb(228, 228, 228);
     line-height: 0.8;
@@ -245,7 +259,7 @@ button.disabled {
 
 .carousel-item label {
     font-family: "fontLabel";
-    font-size:  0.8rem;
+    font-size: 0.8rem;
     text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
