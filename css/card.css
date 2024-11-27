@@ -27,6 +27,11 @@
     src: url(/assets/font/DIMIS___.TTF);
 }
 
+@font-face {
+    font-family: "fontAttack";
+    src: url(/assets/font/Young\ Heart.ttf);
+}
+
 .card span.name {
     font-family: "fontCardName";
     font-size: 24px;
@@ -36,15 +41,15 @@
 
 .card .card-actions button {
     margin-top: 10px;
-    padding: 5px 10px;
+    padding: 0px 0px;
     height: 50px;
     border: none;
     border-radius: 5px;
     background: #ffd000ce;
     color: #000;
     cursor: pointer;
-    font-size: 0.8rem;
     width: 100%;
+    font-family: "fontAttack";
 }
 
 .card .card-actions button:hover {
@@ -57,6 +62,8 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.219);
     /* Maggiore ombra durante hover */
     perspective: 1000px;
+    filter: brightness(1.1);
+    transition: 0.3s;
 }
 
 /* Stile per i paragrafi (contenuti della carta) */
@@ -123,6 +130,7 @@
     /* Aggiunge un bordo dorato alla carta selezionata */
     box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
     /* Aggiunge un'ombra dorata */
+    filter: brightness(1.1);
 }
 
 /* Stile per le carte draggabili */

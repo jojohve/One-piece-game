@@ -13,35 +13,59 @@ body {
     background: url(/assets/aesthetic-blue-watercolor-background-abstract-style.jpg);
 }
 
+@font-face {
+    font-family: "gameFont";
+    src: url(/assets/font/Carnevalee\ Freakshow.ttf);
+}
+
+@font-face {
+    font-family: "titleFont";
+    src: url(/assets/font/Super\ Circus.ttf);
+}
+
+@font-face {
+    font-family: "texasFont";
+    src: url(/assets/font/RioGrande.ttf);
+}
+
 /* Titoli principali */
 h1 {
-    font-size: 3rem;
+    font-size: 5rem;
+    font-family: "titleFont";
     margin-top: 20px;
     color: #eeeeee;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 3rem;
     color: #eeeeee;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    font-family: "gameFont";
+    text-shadow: rgb(0, 0, 0) 1px 0px 0px, rgb(0, 0, 0) 0.540302px 0.841471px 0px, rgb(0, 0, 0) -0.416147px 0.909297px 0px, rgb(0, 0, 0) -0.989993px 0.14112px 0px, rgb(0, 0, 0) -0.653644px -0.756803px 0px, rgb(0, 0, 0) 0.283662px -0.958924px 0px, rgb(0, 0, 0) 0.96017px -0.279416px 0px;
 }
 
 #current-player,
 h3 {
     color: #eeeeee;
+    font-size: 2rem;
+    font-family: "gameFont";
+    text-shadow: rgb(0, 0, 0) 1px 0px 0px, rgb(0, 0, 0) 0.540302px 0.841471px 0px, rgb(0, 0, 0) -0.416147px 0.909297px 0px, rgb(0, 0, 0) -0.989993px 0.14112px 0px, rgb(0, 0, 0) -0.653644px -0.756803px 0px, rgb(0, 0, 0) 0.283662px -0.958924px 0px, rgb(0, 0, 0) 0.96017px -0.279416px 0px;
 }
 
 .red {
     color: red;
+    font-family: "gameFont";
     text-transform: uppercase;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    font-size: 32px;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px, rgb(255, 255, 255) 0.540302px 0.841471px 0px, rgb(255, 255, 255) -0.416147px 0.909297px 0px, rgb(255, 255, 255) -0.989993px 0.14112px 0px, rgb(255, 255, 255) -0.653644px -0.756803px 0px, rgb(255, 255, 255) 0.283662px -0.958924px 0px, rgb(255, 255, 255) 0.96017px -0.279416px 0px;
 }
 
 .blue {
     color: blue;
+    font-family: "gameFont";
     text-transform: uppercase;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    font-size: 32px;
+    text-shadow: rgb(255, 255, 255) 1px 0px 0px, rgb(255, 255, 255) 0.540302px 0.841471px 0px, rgb(255, 255, 255) -0.416147px 0.909297px 0px, rgb(255, 255, 255) -0.989993px 0.14112px 0px, rgb(255, 255, 255) -0.653644px -0.756803px 0px, rgb(255, 255, 255) 0.283662px -0.958924px 0px, rgb(255, 255, 255) 0.96017px -0.279416px 0px;
 }
 
 /* Container delle carte */
@@ -72,6 +96,8 @@ button {
     cursor: pointer;
     transition: background-color 0.3s ease;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    font-family: "texasFont";
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 button:hover {
@@ -113,7 +139,6 @@ button.disabled {
 
 #end-turn-1,
 #end-turn-2 {
-    font-size: smaller;
     margin-bottom: 20px;
 }
 
@@ -278,12 +303,21 @@ span.specialMove {
         font-size: 1rem;
     }
 
+    .game-container {
+        width: 100%;
+    }
+
     h1 {
-        font-size: 2rem;
+        font-size: 1.7rem;
     }
 
     h2 {
         font-size: 1.5rem;
+    }
+
+    #end-turn-1,
+    #end-turn-2 {
+        font-size: smaller;
     }
 
     #player1-cards,
