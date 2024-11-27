@@ -73,13 +73,13 @@ function displayAvailableCards() {
         cardElement.setAttribute('draggable', true);
         cardElement.setAttribute('id', `card-available-${index}`);
         cardElement.innerHTML = `
-            <span>${card.name}</span><br>
-            HP: ${card.hp}<br>
-            Haki: ${card.haki}<br>
-            Mossa: ${card.specialMove.name}<br>
-            Danno: ${card.specialMove.damage}<br>
-            Isola Preferita: ${card.preferredIsland}<br>
-            Tipo Frutto: ${card.fruitType}
+            <span class="name">${card.name}</span><br>
+            <span class="hp">HP: ${card.hp}</span><br>
+            <span class="haki">Haki: ${card.haki}</span><br>
+            <span class="specialMove">Mossa: ${card.specialMove.name}</span><br>
+            <span class="damage">Danno: ${card.specialMove.damage}</span><br>
+            <span class="preferredIsland">Isola Preferita: ${card.preferredIsland}</span><br>
+            <span class="fruitType">Tipo Frutto: ${card.fruitType}</span>
             <button class="add-to-team" data-player="1">Aggiungi al team 1</button>
             <button class="add-to-team" data-player="2">Aggiungi al team 2</button>
         `;
@@ -114,13 +114,13 @@ function displayCards(player) {
         cardElement.setAttribute('draggable', true);
         cardElement.setAttribute('id', `card-${player}-${index}`);
         cardElement.innerHTML = `
-            <span>${card.name}</span><br>
-            HP: ${card.hp}<br>
-            Haki: ${card.haki}<br>
-            Mossa: ${card.specialMove.name}<br>
-            Danno: ${card.specialMove.damage}<br>
-            Isola Preferita: ${card.preferredIsland}<br>
-            Tipo Frutto: ${card.fruitType}
+            <span class="name">${card.name}</span><br>
+            <span class="hp">HP: ${card.hp}</span><br>
+            <span class="haki">Haki: ${card.haki}</span><br>
+            <span class="specialMove">Mossa: ${card.specialMove.name}</span><br>
+            <span class="damage">Danno: ${card.specialMove.damage}</span><br>
+            <span class="preferredIsland">Isola Preferita: ${card.preferredIsland}</span><br>
+            <span class="fruitType">Tipo Frutto: ${card.fruitType}</span>
             <button class="remove-card-btn">Rimuovi dal team</button>
         `;
 

@@ -39,16 +39,14 @@
                 cardElement.style.backgroundSize = 'cover';
                 cardElement.style.backgroundPosition = 'center';
                 cardElement.innerHTML = ` 
-                <span>${cardData.name}</span><br> 
-                HP: ${cardData.hp}<br> 
-                Haki: ${cardData.haki}<br> 
-                Mossa: ${cardData.specialMove.name}<br> 
-                Danno: ${cardData.specialMove.damage}<br> 
-                Isola Preferita: ${cardData.preferredIsland}<br> 
-                Tipo Frutto: ${cardData.fruitType} 
+                <span class="name">${cardData.name}</span><br> 
+                <span class="hp">HP: ${cardData.hp}</span><br> 
+                <span class="damage"><label>Danno: </label>${cardData.specialMove.damage}</span><br> 
+                <span class="preferredIsland"><label>Isola Preferita: </label>${cardData.preferredIsland}</span><br> 
+                <span class="fruitType"><label>Tipo Frutto: </label>${cardData.fruitType} </span>
                 <div class="card-actions"> 
-                    <button class="haki-button">Usa Haki</button> 
-                    <button class="special-move-button">Usa Mossa Speciale</button> 
+                    <button class="haki-button">Haki ${cardData.haki}</button> 
+                    <button class="special-move-button">${cardData.specialMove.name}</button> 
                 </div> `;
 
                 carousel.appendChild(cardElement);

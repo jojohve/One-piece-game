@@ -1,6 +1,7 @@
 .card {
+    position: relative;
     width: 180px;
-    height: 240px;
+    height: 250px;
     padding: 1px;
     margin: 15px;
     border: 2px solid #1f1f1f;
@@ -11,23 +12,43 @@
     flex-shrink: 0;
 }
 
-.card span {
+@font-face {
+    font-family: "fontCardName";
+    src: url(/assets/font/MADE\ Sunflower\ PERSONAL\ USE.otf);
+}
+
+@font-face {
+    font-family: "fontHp";
+    src: url(/assets/font/DIMITRI_.TTF);
+}
+
+@font-face {
+    font-family: "fontSpan";
+    src: url(/assets/font/DIMIS___.TTF);
+}
+
+.card span.name {
+    font-family: "fontCardName";
     font-size: 24px;
     font-weight: bold;
+    text-shadow: rgb(40, 40, 40) 4px 0px 0px, rgb(40, 40, 40) 3.87565px 0.989616px 0px, rgb(40, 40, 40) 3.51033px 1.9177px 0px, rgb(40, 40, 40) 2.92676px 2.72656px 0px, rgb(40, 40, 40) 2.16121px 3.36588px 0px, rgb(40, 40, 40) 1.26129px 3.79594px 0px, rgb(40, 40, 40) 0.282949px 3.98998px 0px, rgb(40, 40, 40) -0.712984px 3.93594px 0px, rgb(40, 40, 40) -1.66459px 3.63719px 0px, rgb(40, 40, 40) -2.51269px 3.11229px 0px, rgb(40, 40, 40) -3.20457px 2.39389px 0px, rgb(40, 40, 40) -3.69721px 1.52664px 0px, rgb(40, 40, 40) -3.95997px 0.56448px 0px, rgb(40, 40, 40) -3.97652px -0.432781px 0px, rgb(40, 40, 40) -3.74583px -1.40313px 0px, rgb(40, 40, 40) -3.28224px -2.28625px 0px, rgb(40, 40, 40) -2.61457px -3.02721px 0px, rgb(40, 40, 40) -1.78435px -3.57996px 0px, rgb(40, 40, 40) -0.843183px -3.91012px 0px, rgb(40, 40, 40) 0.150409px -3.99717px 0px, rgb(40, 40, 40) 1.13465px -3.8357px 0px, rgb(40, 40, 40) 2.04834px -3.43574px 0px, rgb(40, 40, 40) 2.83468px -2.82216px 0px, rgb(40, 40, 40) 3.44477px -2.03312px 0px, rgb(40, 40, 40) 3.84068px -1.11766px 0px, rgb(40, 40, 40) 3.9978px -0.132717px 0px;
 }
 
 .card .card-actions button {
     margin-top: 10px;
     padding: 5px 10px;
+    height: 50px;
     border: none;
     border-radius: 5px;
-    background: #ffcc00;
+    background: #ffd000ce;
     color: #000;
     cursor: pointer;
+    font-size: 0.8rem;
+    width: 100%;
 }
 
 .card .card-actions button:hover {
-    background: #ffaa00;
+    background: #ffc400;
 }
 
 .card:hover {
@@ -48,44 +69,51 @@
     /* Distanza tra i paragrafi */
 }
 
+.card span.hp {
+    font-family: "fontHp";
+    text-shadow: rgb(40, 40, 40) 2px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
+}
+
 /* Stile specifico per le informazioni sui danni */
-.card p span.damage {
-    font-weight: bold;
-    color: #d9534f;
-    /* Rosso per il danno */
+.card span.damage {
+    margin-top: 50px;
+    font-family: "fontSpan";
+    text-shadow: rgb(40, 40, 40) 2px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile per le informazioni sul tipo di frutto */
-.card p span.fruitType {
-    font-style: italic;
-    color: #5bc0de;
-    /* Blu per il tipo di frutto */
+.card span.fruitType {
+    font-family: "fontSpan";
+    text-shadow: rgb(40, 40, 40) 2px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile per le informazioni sull'isola */
-.card p span.preferredIsland {
-    font-weight: bold;
-    color: #28a745;
-    /* Verde per l'isola preferita */
+.card span.preferredIsland {
+    font-family: "fontSpan";
+    text-shadow: rgb(40, 40, 40) 2px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile per i titoli di sezione (haki, special moves) */
-.card p strong {
-    font-weight: bold;
-    color: #17a2b8;
-    /* Blu per le etichette */
+.card span.haki, span.specialMove {
+    font-family: "fontSpan";
+    text-shadow: rgb(40, 40, 40) 2px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 .card-list {
     display: flex;
     margin-bottom: 100px;
-    height: 300px;
+    height: 350px;
     overflow-x: scroll;
     gap: 10px;
 }
 
 .card-actions {
     display: flex;
+    position: absolute;
+    /* Cambia da fixed a absolute */
+    bottom: 0;
+    width: 100%;
+    gap: 1px;
 }
 
 /* Effetto per la carta selezionata */

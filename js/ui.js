@@ -25,16 +25,14 @@ export function displayBattleCards(player, playerDeck) {
 
         // Contenuto della carta
         cardElement.innerHTML = `
-            <span>${card.name}</span><br>
-            HP: ${card.hp}<br>
-            Haki: ${card.haki}<br>
-            Mossa: ${card.specialMove.name}<br>
-            Danno: ${card.specialMove.damage}<br>
-            Isola Preferita: ${card.preferredIsland}<br>
-            Tipo Frutto: ${card.fruitType}
+            <span class="name">${card.name}</span><br>
+            <span class="hp">HP: ${card.hp}</span><br>
+            <span class="damage">Danno: ${card.specialMove.damage}</span><br>
+            <span class="preferredIsland">Isola Preferita: ${card.preferredIsland}</span><br>
+            <span class="fruitType">Tipo Frutto: ${card.fruitType}</span>
             <div class="card-actions">
-                <button class="haki-button">Usa Haki</button>
-                <button class="special-move-button">Usa Mossa Speciale</button>
+                <button class="haki-button">Haki ${card.haki}</button>
+                <button class="special-move-button">${card.specialMove.name}</button>
             </div>
         `;
 
@@ -113,16 +111,14 @@ export function updateCardDisplay(cardId) {
 
     // Aggiorna i campi specifici della carta
     cardElement.innerHTML = `
-        <span>${cardData.name}</span><br>
-        HP: ${cardData.hp}<br>
-        Haki: ${cardData.haki}<br>
-        Mossa: ${cardData.specialMove.name}<br>
-        Danno: ${cardData.specialMove.damage}<br>
-        Isola Preferita: ${cardData.preferredIsland}<br>
-        Tipo Frutto: ${cardData.fruitType}
+        <span class="name">${cardData.name}</span><br>
+        <span class="hp">HP: ${cardData.hp}</span><br>
+        <span class="damage">Danno: ${cardData.specialMove.damage}</span><br>
+        <span class="preferredIsland">Isola Preferita: ${cardData.preferredIsland}</span><br>
+        <span class="fruitType">Tipo Frutto: ${cardData.fruitType}</span>
         <div class="card-actions">
-            <button class="haki-button">Usa Haki</button>
-            <button class="special-move-button">Usa Mossa Speciale</button>
+            <button class="haki-button">Haki ${cardData.haki}</button>
+            <button class="special-move-button">${cardData.specialMove.name}</button>
         </div>
     `;
 

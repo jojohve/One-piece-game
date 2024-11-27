@@ -33,16 +33,14 @@ export function useHaki(cardId) {
 
                         // Aggiorna i campi specifici della carta alleata
                         allyCardElement.innerHTML = `
-                            <span>${allyCard.name}</span><br>
-                            HP: ${allyCard.hp}<br>
-                            Haki: ${allyCard.haki}<br>
-                            Mossa: ${allyCard.specialMove.name}<br>
-                            Danno: ${allyCard.specialMove.damage}<br>
-                            Isola: ${allyCard.preferredIsland}<br>
-                            Frutto: ${allyCard.fruitType}
+                            <span class="name">${allyCard.name}</span><br>
+                            <span class="hp">HP: ${allyCard.hp}</span><br>
+                            <span class="damage">Danno: ${allyCard.specialMove.damage}</span><br>
+                            <span class="preferredIsland">Isola Preferita: ${allyCard.preferredIsland}</span><br>
+                            <span class="fruitType">Tipo Frutto: ${allyCard.fruitType}</span>
                             <div class="card-actions">
-                                <button class="haki-button" ${allyCard.hasUsedHaki ? 'disabled' : ''}>Usa Haki</button>
-                                <button class="special-move-button">Usa Mossa Speciale</button>
+                                <button class="haki-button" ${allyCard.hasUsedHaki ? 'disabled' : ''}>Haki ${allyCard.haki}</button>
+                                <button class="special-move-button">${allyCard.specialMove.name}</button>
                             </div>
                         `;
                         console.log(`Visualizzazione aggiornata per la carta ${allyCard.name} con ID ${allyCardId}`);
@@ -102,16 +100,14 @@ export function useSpecialMove(cardId) {
 
                     // Aggiorna i campi specifici della carta nemica
                     enemyCardElement.innerHTML = `
-                        <span>${enemyCard.name}</span><br>
-                        HP: ${enemyCard.hp}<br>
-                        Haki: ${enemyCard.haki}<br>
-                        Mossa: ${enemyCard.specialMove.name}<br>
-                        Danno: ${enemyCard.specialMove.damage}<br>
-                        Isola: ${enemyCard.preferredIsland}<br>
-                        Frutto: ${enemyCard.fruitType}
+                        <span class="name">${enemyCard.name}</span><br>
+                        <span class="hp">HP: ${enemyCard.hp}</span><br>
+                        <span class="damage">Danno: ${enemyCard.specialMove.damage}</span><br>
+                        <span class="preferredIsland">Isola Preferita: ${enemyCard.preferredIsland}</span><br>
+                        <span class="fruitType">Tipo Frutto: ${enemyCard.fruitType}</span>
                         <div class="card-actions">
-                            <button class="haki-button" ${enemyCard.hasUsedHaki ? 'disabled' : ''}>Usa Haki</button>
-                            <button class="special-move-button">Usa Mossa Speciale</button>
+                            <button class="haki-button" ${enemyCard.hasUsedHaki ? 'disabled' : ''}>Haki ${enemyCard.haki}</button>
+                            <button class="special-move-button">${enemyCard.specialMove.name}</button>
                         </div>
                     `;
                     console.log(`Visualizzazione aggiornata per la carta ${enemyCard.name} con ID ${enemyCardId}`);

@@ -89,7 +89,7 @@ button.disabled {
 
 .add-to-team,
 .remove-card-btn {
-    margin: 1px;
+    margin-top: 10px;
     font-size: 14px;
 }
 
@@ -123,20 +123,26 @@ button.disabled {
     height: 400px;
     margin: 150px auto;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.637);
+    background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
+    ;
     border-radius: 15px;
+    border: 2px solid rgb(41, 41, 41);
 }
 
 .carousel-inner {
     display: flex;
-    animation: scroll 15s linear infinite;
+    animation: scroll 180s linear infinite;
+    justify-content: center;
+    align-items: center;
 }
 
 .carousel-item {
+    position: relative;
+    /* Aggiungi questa riga */
     width: 180px;
-    height: 240px;
+    height: 250px;
     padding: 1px;
-    margin: 15px;
+    margin: 25px;
     border: 2px solid #1f1f1f;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -145,27 +151,27 @@ button.disabled {
     flex-shrink: 0;
 }
 
-.carousel-item span {
-    font-size: 24px;
-    font-weight: bold;
-}
-
 .carousel-item .card-actions {
     display: flex;
+    position: absolute;
+    /* Cambia da fixed a absolute */
+    bottom: 0;
+    width: 100%;
+    gap: 1px;
 }
 
 .carousel-item .card-actions button {
-    margin-top: 10px;
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
-    background: #ffcc00;
-    color: #000;
+    background: #ffcc003b;
+    color: white;
     cursor: pointer;
+    font-size: 0.9rem;
 }
 
 .carousel-item .card-actions button:hover {
-    background: #ffaa00;
+    background: #ffba2fd2;
 }
 
 .carousel-item:hover {
@@ -174,42 +180,73 @@ button.disabled {
     perspective: 1000px;
 }
 
-/* Stile per i paragrafi (contenuti della carta) */
-.carousel-item p {
-    font-size: 0.9rem;
-    /* Dimensione del testo */
-    color: #555;
-    /* Colore del testo leggermente più chiaro */
-    margin: 8px 0;
-    /* Distanza tra i paragrafi */
+.carousel-item span.haki , span.damage , span.fruitType , span.preferredIsland , span.specialMove {
+    display: flex;
+    color: rgb(228, 228, 228);
+    line-height: 0.8;
+}
+
+.carousel-item span.hp {
+    font-family: "fontSpan";
+    text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
+}
+
+.carousel-item span.haki {
+    font-family: "fontSpan";
+    text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile specifico per le informazioni sui danni */
-.carousel-item p span.damage {
-    font-weight: bold;
-    color: #d9534f;
-    /* Rosso per il danno */
+.carousel-item span.damage {
+    font-family: "fontSpan";
+    margin-top: 50px;
+    text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile per le informazioni sul tipo di frutto */
-.carousel-item p span.fruitType {
-    font-style: italic;
-    color: #5bc0de;
-    /* Blu per il tipo di frutto */
+.carousel-item span.fruitType {
+    font-family: "fontSpan";
+    text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile per le informazioni sull'isola */
-.carousel-item p span.preferredIsland {
-    font-weight: bold;
-    color: #28a745;
-    /* Verde per l'isola preferita */
+.carousel-item span.preferredIsland {
+    font-family: "fontSpan";
+    text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile per i titoli di sezione (haki, special moves) */
-.carousel-item p strong {
+.carousel-item span.specialMove {
+    font-family: "fontSpan";
+    text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
+}
+
+@font-face {
+    font-family: "fontCardName";
+    src: url(/assets/font/MADE\ Sunflower\ PERSONAL\ USE.otf);
+}
+
+@font-face {
+    font-family: "fontLabel";
+    src: url(/assets/font/DIMIS___.TTF);
+}
+
+@font-face {
+    font-family: "fontSpan";
+    src: url(/assets/font/DIMITRI_.TTF);
+}
+
+.carousel-item span.name {
+    font-family: "fontCardName";
+    font-size: 24px;
     font-weight: bold;
-    color: #17a2b8;
-    /* Blu per le etichette */
+    text-shadow: rgb(40, 40, 40) 4px 0px 0px, rgb(40, 40, 40) 3.87565px 0.989616px 0px, rgb(40, 40, 40) 3.51033px 1.9177px 0px, rgb(40, 40, 40) 2.92676px 2.72656px 0px, rgb(40, 40, 40) 2.16121px 3.36588px 0px, rgb(40, 40, 40) 1.26129px 3.79594px 0px, rgb(40, 40, 40) 0.282949px 3.98998px 0px, rgb(40, 40, 40) -0.712984px 3.93594px 0px, rgb(40, 40, 40) -1.66459px 3.63719px 0px, rgb(40, 40, 40) -2.51269px 3.11229px 0px, rgb(40, 40, 40) -3.20457px 2.39389px 0px, rgb(40, 40, 40) -3.69721px 1.52664px 0px, rgb(40, 40, 40) -3.95997px 0.56448px 0px, rgb(40, 40, 40) -3.97652px -0.432781px 0px, rgb(40, 40, 40) -3.74583px -1.40313px 0px, rgb(40, 40, 40) -3.28224px -2.28625px 0px, rgb(40, 40, 40) -2.61457px -3.02721px 0px, rgb(40, 40, 40) -1.78435px -3.57996px 0px, rgb(40, 40, 40) -0.843183px -3.91012px 0px, rgb(40, 40, 40) 0.150409px -3.99717px 0px, rgb(40, 40, 40) 1.13465px -3.8357px 0px, rgb(40, 40, 40) 2.04834px -3.43574px 0px, rgb(40, 40, 40) 2.83468px -2.82216px 0px, rgb(40, 40, 40) 3.44477px -2.03312px 0px, rgb(40, 40, 40) 3.84068px -1.11766px 0px, rgb(40, 40, 40) 3.9978px -0.132717px 0px;
+}
+
+.carousel-item label {
+    font-family: "fontLabel";
+    font-size:  0.8rem;
+    text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 @keyframes scroll {
@@ -218,10 +255,8 @@ button.disabled {
     }
 
     100% {
-        transform: translateX(calc(-300px * 3));
+        transform: translateX(calc(-300px * 50));
     }
-
-    /* Adjust based on the number of cards */
 }
 
 @media (max-width: 600px) {
@@ -254,5 +289,9 @@ button.disabled {
 
     .turn-info {
         margin: 0 20px;
+    }
+
+    .carousel {
+        max-width: 100%;
     }
 }
