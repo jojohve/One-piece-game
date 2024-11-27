@@ -123,6 +123,13 @@ button.disabled {
     z-index: 1000;
 }
 
+.index-container {
+    background-position: center;
+    background-size: cover;
+    height: 900px;
+    background: url(/assets/one-piece-pictures-de2t2bhjiyhtaszq.jpg);
+}
+
 .add-to-team,
 .remove-card-btn {
     margin-top: 10px;
@@ -156,7 +163,8 @@ button.disabled {
     overflow: hidden;
     width: 800px;
     height: 400px;
-    margin: 150px auto;
+    margin: 250px auto;
+    bottom: 10px;
     padding: 10px;
     background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
     ;
@@ -294,7 +302,7 @@ span.specialMove {
     }
 
     100% {
-        transform: translateX(calc(-300px * 50));
+        transform: translateX(calc(-300px * 75));
     }
 }
 
