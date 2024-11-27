@@ -42,7 +42,7 @@ h2 {
 #player2-deck {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 5px;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8);
     border: 2px solid #4b2e0e;
@@ -114,6 +114,114 @@ button.disabled {
     /* Riduce l'opacità per indicare che è disabilitato */
     cursor: not-allowed;
     /* Cambia il cursore per indicare che è disabilitato */
+}
+
+.carousel {
+    display: flex;
+    overflow: hidden;
+    width: 800px;
+    height: 400px;
+    margin: 150px auto;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.637);
+    border-radius: 15px;
+}
+
+.carousel-inner {
+    display: flex;
+    animation: scroll 15s linear infinite;
+}
+
+.carousel-item {
+    width: 180px;
+    height: 240px;
+    padding: 1px;
+    margin: 15px;
+    border: 2px solid #1f1f1f;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    flex-shrink: 0;
+}
+
+.carousel-item span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.carousel-item .card-actions {
+    display: flex;
+}
+
+.carousel-item .card-actions button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background: #ffcc00;
+    color: #000;
+    cursor: pointer;
+}
+
+.carousel-item .card-actions button:hover {
+    background: #ffaa00;
+}
+
+.carousel-item:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.219);
+    /* Maggiore ombra durante hover */
+    perspective: 1000px;
+}
+
+/* Stile per i paragrafi (contenuti della carta) */
+.carousel-item p {
+    font-size: 0.9rem;
+    /* Dimensione del testo */
+    color: #555;
+    /* Colore del testo leggermente più chiaro */
+    margin: 8px 0;
+    /* Distanza tra i paragrafi */
+}
+
+/* Stile specifico per le informazioni sui danni */
+.carousel-item p span.damage {
+    font-weight: bold;
+    color: #d9534f;
+    /* Rosso per il danno */
+}
+
+/* Stile per le informazioni sul tipo di frutto */
+.carousel-item p span.fruitType {
+    font-style: italic;
+    color: #5bc0de;
+    /* Blu per il tipo di frutto */
+}
+
+/* Stile per le informazioni sull'isola */
+.carousel-item p span.preferredIsland {
+    font-weight: bold;
+    color: #28a745;
+    /* Verde per l'isola preferita */
+}
+
+/* Stile per i titoli di sezione (haki, special moves) */
+.carousel-item p strong {
+    font-weight: bold;
+    color: #17a2b8;
+    /* Blu per le etichette */
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-300px * 3));
+    }
+
+    /* Adjust based on the number of cards */
 }
 
 @media (max-width: 600px) {

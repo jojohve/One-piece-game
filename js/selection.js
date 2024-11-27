@@ -67,6 +67,9 @@ function displayAvailableCards() {
     availableCards.forEach((card, index) => {
         const cardElement = document.createElement('div');
         cardElement.classList.add('card');
+        cardElement.style.background = card.background; 
+        cardElement.style.backgroundSize = 'cover';
+        cardElement.style.backgroundPosition = 'center';
         cardElement.setAttribute('draggable', true);
         cardElement.setAttribute('id', `card-available-${index}`);
         cardElement.innerHTML = `
@@ -75,8 +78,8 @@ function displayAvailableCards() {
             Haki: ${card.haki}<br>
             Mossa: ${card.specialMove.name}<br>
             Danno: ${card.specialMove.damage}<br>
-            ${card.preferredIsland}<br>
-            Tipo: ${card.fruitType}
+            Isola Preferita: ${card.preferredIsland}<br>
+            Tipo Frutto: ${card.fruitType}
             <button class="add-to-team" data-player="1">Aggiungi al team 1</button>
             <button class="add-to-team" data-player="2">Aggiungi al team 2</button>
         `;
@@ -105,6 +108,9 @@ function displayCards(player) {
         console.log(`Carta ${card.name} da visualizzare`);
         const cardElement = document.createElement('div');
         cardElement.classList.add('card');
+        cardElement.style.background = card.background; 
+        cardElement.style.backgroundSize = 'cover';
+        cardElement.style.backgroundPosition = 'center';
         cardElement.setAttribute('draggable', true);
         cardElement.setAttribute('id', `card-${player}-${index}`);
         cardElement.innerHTML = `
@@ -113,8 +119,8 @@ function displayCards(player) {
             Haki: ${card.haki}<br>
             Mossa: ${card.specialMove.name}<br>
             Danno: ${card.specialMove.damage}<br>
-            Isola: ${card.preferredIsland}<br>
-            Tipo: ${card.fruitType}
+            Isola Preferita: ${card.preferredIsland}<br>
+            Tipo Frutto: ${card.fruitType}
             <button class="remove-card-btn">Rimuovi dal team</button>
         `;
 

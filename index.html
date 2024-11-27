@@ -10,16 +10,50 @@
 
 <body>
     <h1>One Piece Card Game</h1>
-    <button style="margin: 50px;">G1 vs CPU</button><br>
+
+    <!-- <button style="margin: 50px;">G1 vs CPU</button><br>  -->
     <button onclick="startGame()">G1 vs G2</button>
 
-    <script>
-        function startGame() {
-            localStorage.clear();
+    <div class="carousel">
+        <div class="carousel-inner" id="carousel">
+            <!-- Le carte saranno inserite qui dinamicamente -->
+        </div>
 
-            window.location.href = 'selection.html';
-        }
-    </script>
+        <script>
+            function startGame() {
+                localStorage.clear();
+
+                window.location.href = 'selection.html';
+            } 
+        </script>
+
+        <script type="module">
+            import { availableCards } from './js/cards.js';
+
+            const carousel = document.getElementById('carousel');
+
+            availableCards.forEach(cardData => {
+                const cardElement = document.createElement('div');
+                cardElement.className = 'carousel-item card';
+                cardElement.style.background = cardData.background;
+                cardElement.style.backgroundSize = 'cover';
+                cardElement.style.backgroundPosition = 'center';
+                cardElement.innerHTML = ` 
+                <span>${cardData.name}</span><br> 
+                HP: ${cardData.hp}<br> 
+                Haki: ${cardData.haki}<br> 
+                Mossa: ${cardData.specialMove.name}<br> 
+                Danno: ${cardData.specialMove.damage}<br> 
+                Isola Preferita: ${cardData.preferredIsland}<br> 
+                Tipo Frutto: ${cardData.fruitType} 
+                <div class="card-actions"> 
+                    <button class="haki-button">Usa Haki</button> 
+                    <button class="special-move-button">Usa Mossa Speciale</button> 
+                </div> `;
+
+                carousel.appendChild(cardElement);
+            }); 
+        </script>
 </body>
 
 </html>

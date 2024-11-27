@@ -19,6 +19,9 @@ export function displayBattleCards(player, playerDeck) {
 
         // Associa i dati della carta all'elemento DOM
         cardElement.cardData = card;
+        cardElement.style.background = card.background; 
+        cardElement.style.backgroundSize = 'cover';
+        cardElement.style.backgroundPosition = 'center';
 
         // Contenuto della carta
         cardElement.innerHTML = `
@@ -27,8 +30,8 @@ export function displayBattleCards(player, playerDeck) {
             Haki: ${card.haki}<br>
             Mossa: ${card.specialMove.name}<br>
             Danno: ${card.specialMove.damage}<br>
-            Isola: ${card.preferredIsland}<br>
-            Frutto: ${card.fruitType}
+            Isola Preferita: ${card.preferredIsland}<br>
+            Tipo Frutto: ${card.fruitType}
             <div class="card-actions">
                 <button class="haki-button">Usa Haki</button>
                 <button class="special-move-button">Usa Mossa Speciale</button>
@@ -115,8 +118,8 @@ export function updateCardDisplay(cardId) {
         Haki: ${cardData.haki}<br>
         Mossa: ${cardData.specialMove.name}<br>
         Danno: ${cardData.specialMove.damage}<br>
-        Isola: ${cardData.preferredIsland}<br>
-        Frutto: ${cardData.fruitType}
+        Isola Preferita: ${cardData.preferredIsland}<br>
+        Tipo Frutto: ${cardData.fruitType}
         <div class="card-actions">
             <button class="haki-button">Usa Haki</button>
             <button class="special-move-button">Usa Mossa Speciale</button>

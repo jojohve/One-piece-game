@@ -1,26 +1,33 @@
 .card {
-    background-color: #f9f9f9;
-    /* Sfondo chiaro per le carte */
+    width: 180px;
+    height: 240px;
+    padding: 1px;
+    margin: 15px;
+    border: 2px solid #1f1f1f;
     border-radius: 10px;
-    /* Angoli arrotondati */
-    padding: 20px;
-    /* Distanza interna */
-    width: 160px;
-    /* Larghezza fissa per ogni carta */
-    height: 200px;
-    margin: 10px;
-    /* Distanza tra le carte */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    /* Ombra leggera per l'effetto di profondità */
-    text-align: center;
-    /* Allineamento centrale per il contenuto */
-    font-family: Arial, sans-serif;
-    /* Font leggibile */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* Animazione per hover */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
     flex-shrink: 0;
-    z-index: 100;
-    cursor: default;
+}
+
+.card span {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.card .card-actions button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background: #ffcc00;
+    color: #000;
+    cursor: pointer;
+}
+
+.card .card-actions button:hover {
+    background: #ffaa00;
 }
 
 .card:hover {
@@ -29,17 +36,6 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.219);
     /* Maggiore ombra durante hover */
     perspective: 1000px;
-}
-
-/* Stile per i titoli (nomi delle carte) */
-.card span {
-    font-size: 1.4rem;
-    /* Dimensione del titolo */
-    color: #333;
-    /* Colore scuro per il testo */
-    margin-bottom: 10px;
-    /* Distanza sotto il titolo */
-    font-weight: bold;
 }
 
 /* Stile per i paragrafi (contenuti della carta) */
@@ -85,24 +81,11 @@
     margin-bottom: 100px;
     height: 300px;
     overflow-x: scroll;
-    gap: 5px;
+    gap: 10px;
 }
 
 .card-actions {
     display: flex;
-}
-
-.card .haki-button,
-.card .special-move-button {
-    font-size: 14px;
-    padding: 10px;
-    margin: 1px;
-    background-color: rgb(255, 100, 100);
-}
-
-.card .haki-button:hover,
-.card .special-move-button:hover {
-    background-color: rgb(202, 93, 93);
 }
 
 /* Effetto per la carta selezionata */
