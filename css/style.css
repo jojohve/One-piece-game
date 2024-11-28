@@ -110,6 +110,10 @@ button.disabled {
     cursor: not-allowed;
 }
 
+#start-battle {
+    margin-bottom: 25px;
+}
+
 .error-message {
     position: fixed;
     top: 20px;
@@ -147,6 +151,12 @@ button.disabled {
 #end-turn-1,
 #end-turn-2 {
     margin-bottom: 20px;
+}
+
+.random-button {
+   margin: 10px; 
+   padding: 15px;   
+   letter-spacing: 0.1rem;
 }
 
 .disabled {
@@ -233,11 +243,6 @@ span.specialMove {
     line-height: 0.8;
 }
 
-.carousel-item span.hp {
-    font-family: "fontSpan";
-    text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
-}
-
 .carousel-item span.haki {
     font-family: "fontSpan";
     text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
@@ -245,19 +250,21 @@ span.specialMove {
 
 /* Stile specifico per le informazioni sui danni */
 .carousel-item span.damage {
+    margin-top: 10px;
     font-family: "fontSpan";
-    margin-top: 50px;
     text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile per le informazioni sul tipo di frutto */
 .carousel-item span.fruitType {
+    margin-top: 0px;
     font-family: "fontSpan";
     text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile per le informazioni sull'isola */
 .carousel-item span.preferredIsland {
+    margin-top: 10px;
     font-family: "fontSpan";
     text-shadow: rgb(40, 40, 40) 1px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
@@ -323,12 +330,6 @@ span.specialMove {
         font-size: 1.5rem;
     }
 
-    #player1-cards,
-    #player2-cards {
-        max-width: 90%;
-        height: 100%;
-    }
-
     #end-turn-1,
     #end-turn-2 {
         font-size: smaller;
@@ -342,6 +343,8 @@ span.specialMove {
         align-items: center;
         padding: 10px;
         margin: 10px;
+        max-width: 90%;
+        max-height: 100%;
     }
 
     button {

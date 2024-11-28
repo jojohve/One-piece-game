@@ -74,9 +74,8 @@ function displayAvailableCards() {
         cardElement.setAttribute('id', `card-available-${index}`);
         cardElement.innerHTML = `
             <span class="name">${card.name}</span><br>
-            <span class="hp">HP: ${card.hp}</span><br>
             <span class="haki">Haki: ${card.haki}</span><br>
-            <span class="specialMove">Mossa: ${card.specialMove.name}</span><br>
+            <span class="specialMove">Mossa: ${card.specialMove.name}</span><span class="hp">HP: ${card.hp}</span><br>
             <span class="damage">Danno: ${card.specialMove.damage}</span><br>
             <span class="preferredIsland">Isola Preferita: ${card.preferredIsland}</span><br>
             <span class="fruitType">Tipo Frutto: ${card.fruitType}</span>
@@ -115,9 +114,8 @@ function displayCards(player) {
         cardElement.setAttribute('id', `card-${player}-${index}`);
         cardElement.innerHTML = `
             <span class="name">${card.name}</span><br>
-            <span class="hp">HP: ${card.hp}</span><br>
             <span class="haki">Haki: ${card.haki}</span><br>
-            <span class="specialMove">Mossa: ${card.specialMove.name}</span><br>
+            <span class="specialMove">Mossa: ${card.specialMove.name}</span><span class="hp">HP: ${card.hp}</span><br>
             <span class="damage">Danno: ${card.specialMove.damage}</span><br>
             <span class="preferredIsland">Isola Preferita: ${card.preferredIsland}</span><br>
             <span class="fruitType">Tipo Frutto: ${card.fruitType}</span>

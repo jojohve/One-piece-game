@@ -26,8 +26,7 @@ export function displayBattleCards(player, playerDeck) {
         // Contenuto della carta
         cardElement.innerHTML = `
             <span class="name">${card.name}</span><br>
-            <span class="hp">HP: ${card.hp}</span><br>
-            <span class="damage">Danno: ${card.specialMove.damage}</span><br>
+            <span class="damage">Danno: ${card.specialMove.damage}</span><span class="hp">HP: ${card.hp}</span><br>
             <span class="preferredIsland">Isola Preferita: ${card.preferredIsland}</span><br>
             <span class="fruitType">Tipo Frutto: ${card.fruitType}</span>
             <div class="card-actions">
@@ -112,8 +111,7 @@ export function updateCardDisplay(cardId) {
     // Aggiorna i campi specifici della carta
     cardElement.innerHTML = `
         <span class="name">${cardData.name}</span><br>
-        <span class="hp">HP: ${cardData.hp}</span><br>
-        <span class="damage">Danno: ${cardData.specialMove.damage}</span><br>
+        <span class="damage">Danno: ${cardData.specialMove.damage}</span><span class="hp">HP: ${cardData.hp}</span><br>
         <span class="preferredIsland">Isola Preferita: ${cardData.preferredIsland}</span><br>
         <span class="fruitType">Tipo Frutto: ${cardData.fruitType}</span>
         <div class="card-actions">

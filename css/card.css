@@ -1,7 +1,7 @@
 .card {
     position: relative;
-    width: 180px;
-    height: 250px;
+    width: 200px;
+    height: 260px;
     padding: 1px;
     margin: 15px;
     border: 2px solid #1f1f1f;
@@ -76,33 +76,53 @@
     /* Distanza tra i paragrafi */
 }
 
+.card span.name {
+    display: block;
+    margin-bottom: 70px;
+    /* Cambia il valore in base alla distanza che preferisci */
+}
+
+.card span.hp,
+.card span.damage {
+    display: inline;
+    vertical-align: center;
+    /* Usa top per allineare in alto, dato che center non è valido */
+    margin-right: 10px;
+    /* Cambia il valore in base alla distanza che preferisci */
+}
+
 .card span.hp {
+    margin-top: 100px;
     font-family: "fontHp";
-    font-size: large;
+    font-size: larger;
     text-shadow: rgb(40, 40, 40) 2px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile specifico per le informazioni sui danni */
 .card span.damage {
-    margin-top: 50px;
+    margin-top: 100px;
     font-family: "fontSpan";
+    font-size: large;
     text-shadow: rgb(40, 40, 40) 2px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile per le informazioni sul tipo di frutto */
 .card span.fruitType {
+    margin-top: 0px;
     font-family: "fontSpan";
     text-shadow: rgb(40, 40, 40) 2px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile per le informazioni sull'isola */
 .card span.preferredIsland {
+    margin-top: 5px;
     font-family: "fontSpan";
     text-shadow: rgb(40, 40, 40) 2px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
 
 /* Stile per i titoli di sezione (haki, special moves) */
-.card span.haki, span.specialMove {
+.card span.haki,
+span.specialMove {
     font-family: "fontSpan";
     text-shadow: rgb(40, 40, 40) 2px 0px 0px, rgb(40, 40, 40) 1.75517px 0.958851px 0px, rgb(40, 40, 40) 1.0806px 1.68294px 0px, rgb(40, 40, 40) 0.141474px 1.99499px 0px, rgb(40, 40, 40) -0.832294px 1.81859px 0px, rgb(40, 40, 40) -1.60229px 1.19694px 0px, rgb(40, 40, 40) -1.97999px 0.28224px 0px, rgb(40, 40, 40) -1.87291px -0.701566px 0px, rgb(40, 40, 40) -1.30729px -1.51361px 0px, rgb(40, 40, 40) -0.421592px -1.95506px 0px, rgb(40, 40, 40) 0.567324px -1.91785px 0px, rgb(40, 40, 40) 1.41734px -1.41108px 0px, rgb(40, 40, 40) 1.92034px -0.558831px 0px;
 }
@@ -173,6 +193,8 @@
 @media (max-width: 600px) {
     .card {
         margin: 5px;
+        width: 170px;
+        height: 230px;
     }
 
     .card span {
@@ -180,13 +202,23 @@
         /* Riduci leggermente la dimensione del titolo */
     }
 
-    .card span.damage, span.preferredIsland, span.fruitType {
+    .card span.hp {
+        font-size: 1rem;
+    }
+
+    .card span.damage,
+    span.preferredIsland,
+    span.fruitType {
         font-size: 0.7rem;
         /* Riduci leggermente la dimensione del testo */
     }
 
+    .card span.haki, span.specialMove {
+        font-size: 0.9rem;
+    }
+
     .card-list {
-        height: auto;
+        max-height: 100%;
         /* Permetti alla lista di adattarsi al contenuto */
     }
 
