@@ -164,7 +164,7 @@ button.disabled {
     width: 800px;
     height: 400px;
     margin: 250px auto;
-    bottom: 10px;
+    bottom: 5px;
     padding: 10px;
     background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
     ;
@@ -302,7 +302,7 @@ span.specialMove {
     }
 
     100% {
-        transform: translateX(calc(-300px * 75));
+        transform: translateX(calc(-300px * 100));
     }
 }
 
@@ -316,11 +316,17 @@ span.specialMove {
     }
 
     h1 {
-        font-size: 1.7rem;
+        font-size: 2.7rem;
     }
 
     h2 {
         font-size: 1.5rem;
+    }
+
+    #player1-cards,
+    #player2-cards {
+        max-width: 90%;
+        height: 100%;
     }
 
     #end-turn-1,
@@ -343,11 +349,17 @@ span.specialMove {
         padding: 8px 16px;
     }
 
+    .startGame {
+        padding: 20px 20px;
+        font-size: 1.4rem;
+    }
+
     .turn-info {
         margin: 0 20px;
     }
 
     .carousel {
-        max-width: 100%;
+        max-width: 90%;
+        margin: 10px 0;
     }
 }
