@@ -1,9 +1,9 @@
 const islands = [
     'Orange Town', 'Arlong Park', 'Baratie', 'Logue Town', 'Drum Island',
-    'Regno dei Ciliegi', 'Little Garden', 'Alabasta', 'Water Seven', 'Ohara',
-    'Enies Lobby', 'Jaya', 'Skypea', 'Thriller Bark', 'Arcipelago Sabaody',
-    'Amazon Lily', 'Impel Down', 'Marineford', 'Isola degli Uomini-Pesce',
-    'Punk Hazard', 'Dressrosa', 'Whole Cake Island', 'Zou', 'Wano', 'Egg-Head', 'Elbaf', 'Raftel'
+    'Little Garden', 'Alabasta', 'Water Seven', 'Ohara', 'Enies Lobby', 'Long Ring Long Land',
+    'Jaya', 'Skypea', 'Thriller Bark', 'Arcipelago Sabaody', 'Amazon Lily',
+    'Impel Down', 'Marineford', 'Isola degli Uomini-Pesce', 'Punk Hazard', 'Dressrosa',
+    'Whole Cake Island', 'Zou', 'Wano', 'Egg-Head', 'Elbaf', 'Raftel'
 ];
 
 let islandStates = {}; // Stato delle vite per ogni isola
