@@ -11,15 +11,17 @@ export function useHaki(cardId) {
         switch (cardData.haki) {
             case 'Armatura':
                 cardData.hp += 30; // Aumenta gli HP della carta che utilizza Haki dell'Armatura
-                console.log("Haki dell'Armatura usato da:", cardElement);
+                alert(`Haki dell'Armatura usato da: ${cardData.name}`);
                 // Aggiorna la visualizzazione della carta corrente
                 const currentCardId = `battle-card-${cardData.player}-${cardData.id}`;
                 updateCardDisplay(currentCardId);
                 break;
             case 'Osservazione':
-                console.log("Haki dell'Osservazione usato da:", cardElement);
+                alert(`Haki dell'Osservazione usato da: ${cardData.name}`);
                 break;
             case 'Conquistatore':
+                alert(`Haki del Re Conquistatore usato da: ${cardData.name}`);
+
                 // Recupera i mazzi dei giocatori
                 const playerDeckKey = `player${cardData.player}Deck`;
                 const playerDeck = JSON.parse(localStorage.getItem(playerDeckKey)) || [];
@@ -72,8 +74,14 @@ export function useSpecialMove(cardId) {
         const cardElement = document.getElementById(cardId);
         const cardData = cardElement.cardData;
         const currentPosition = cardData.currentPosition;
-        const damage = cardData.specialMove.damage;
 
+        // Controllo per evitare attacchi dalla posizione "inizio"
+        if (currentPosition === "inizio") {
+            console.log(`La carta ${cardData.name} è nella posizione di inizio e non può attaccare.`);
+            return;
+        }
+
+        const damage = cardData.specialMove.damage;
         console.log(`Carta che usa la mossa speciale: ${cardData.name}, Posizione corrente: ${currentPosition}`);
 
         // Recupera i mazzi dei giocatori
@@ -88,7 +96,7 @@ export function useSpecialMove(cardId) {
         enemyDeck.forEach((enemyCard, index) => {
             if (enemyCard.currentPosition === currentPosition) {
                 enemyCard.hp -= damage; // Sottrai la vita del nemico
-                console.log(`Danno inflitto a ${enemyCard.name}: ${damage}. Vita rimanente: ${enemyCard.hp}`);
+                alert(`Danno inflitto a ${enemyCard.name}: ${damage}. Vita rimanente: ${enemyCard.hp}`);
 
                 // Costruisci l'ID della carta nemica utilizzando l'opposto del currentPlayer
                 const enemyCardId = `battle-card-${oppositePlayer}-${enemyCard.id}`;

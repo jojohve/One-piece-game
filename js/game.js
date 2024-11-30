@@ -1,5 +1,7 @@
 import { assignIslandIDs } from "./islands.js";
-import { displayBattleCards } from "./ui.js";
+import { displayBattleCards, updateCardPosition, updateCardDisplay } from "./ui.js";
+import { useHaki, useSpecialMove } from './abilities.js'
+import { checkPreferredIslandAndBoostDamage } from './drag.js';
 
 let turnNumber = 0;
 export let currentPlayer = 1;
@@ -27,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Inizializza il gioco solo dopo aver recuperato i mazzi
-    startGame(player1Deck, player2Deck);
+    startGame(player1Deck, player2Deck, gameMode);
     checkForWinner();
 });
 
@@ -39,7 +41,7 @@ function getDeckFromStorage() {
 }
 
 // Funzione per avviare il gioco
-export function startGame(player1Deck, player2Deck) {
+export function startGame(player1Deck, player2Deck, gameMode) {
     // Imposta i mazzi globali
     window.player1Deck = player1Deck;
     window.player2Deck = player2Deck;
@@ -112,21 +114,93 @@ export function setHasUsedHaki(value) {
     hasUsedHaki = value;
 }
 
-// Funzione per gestire i turni della CPU 
+let islandIDs = []; // Variabile per contenere gli ID delle isole
+
+// Funzione per gestire i turni della CPU
 function cpuTurn() {
     console.log("Turno della CPU");
-    // Implementa la logica per l'azione della CPU qui 
-    // Ad esempio, la CPU può fare una mossa casuale 
+
+    // Inizializza gli ID delle isole se non è già stato fatto
+    if (islandIDs.length === 0) {
+        assignIslandIDs(); // Assicura che le isole siano assegnate
+        islandIDs = Array.from(document.querySelectorAll('.island')).map(el => el.id);
+    }
+
+    // La CPU può muovere, attaccare e usare abilità una volta per turno
     makeRandomMove();
-    // Passa il turno al giocatore umano dopo la mossa della CPU
+    performAttackAndUseAbilities();
+
+    // Passa il turno al giocatore umano dopo le mosse della CPU
     switchTurn();
     Turn();
 }
 
 function makeRandomMove() {
-    console.log("La CPU sta facendo una mossa casuale...");
-    // Implementa la logica per una mossa casuale della CPU 
-    // Ad esempio, la CPU può scegliere una carta casuale e giocarla
+    alert("La CPU sta facendo una mossa!");
+
+    // Seleziona una carta casuale dal mazzo della CPU
+    const cpuDeck = window.player2Deck;
+    const randomCardIndex = Math.floor(Math.random() * cpuDeck.length);
+    const randomCard = cpuDeck[randomCardIndex];
+
+    // Seleziona un'isola casuale dall'elenco delle isole
+    const randomIslandIndex = Math.floor(Math.random() * islandIDs.length);
+    const randomIslandId = islandIDs[randomIslandIndex];
+    console.log(`Tentativo di drop della carta ${randomCard.name} all'isola ${randomIslandId}`);
+
+    // Aggiorna la posizione della carta 
+    randomCard.islandId = randomIslandId;
+    updateCardPosition(`battle-card-2-${randomCard.id}`, randomIslandId);
+
+    // Aggiorna la visualizzazione della carta 
+    const cardElement = document.getElementById(`battle-card-2-${randomCard.id}`);
+    const islandElement = document.getElementById(randomIslandId);
+
+    if (cardElement && islandElement) {
+        islandElement.appendChild(cardElement);
+        checkPreferredIslandAndBoostDamage(`battle-card-2-${randomCard.id}`, randomIslandId);
+        setHasMoved(true);
+        updateCardDisplay(`battle-card-2-${randomCard.id}`);
+    }
+}
+
+function performAttackAndUseAbilities() {
+    const cpuDeck = window.player2Deck;
+
+    for (let i = 0; i < cpuDeck.length; i++) {
+        const card = cpuDeck[i];
+
+        // Verifica se ci sono nemici sulla stessa isola e l'isola non è una zona iniziale
+        if (isEnemyOnSameIsland(card) && !isInitialZone(card.islandId)) {
+            useSpecialMove(`battle-card-2-${card.id}`);
+            break; // Attacca una volta per turno
+        }
+
+        // Decidi arbitrariamente se usare l'Haki
+        if (!card.hasUsedHaki && shouldUseHaki()) {
+            useHaki(`battle-card-2-${card.id}`);
+            card.hasUsedHaki = true; // Segna che l'Haki è stato usato
+            setHasUsedHaki(true);
+            break; // Usa l'Haki una volta per turno
+        }
+    }
+
+    setHasUsedSpecialMove(false); // Reset dello stato dopo l'attacco e l'uso delle abilità
+}
+
+function isEnemyOnSameIsland(card) {
+    const islandId = card.islandId;
+    const enemyCards = window.player1Deck.filter(c => c.islandId === islandId);
+    return enemyCards.length > 0;
+}
+
+function isInitialZone(islandId) {
+    const initialZones = ['inizio']; // Esempio di ID della zona iniziale
+    return initialZones.includes(islandId);
+}
+
+function shouldUseHaki() {
+    return Math.random() < 0.5; // 50% di probabilità di usare l'Haki
 }
 
 function Turn() {

@@ -55,6 +55,11 @@ export function assignIslandIDs() {
 // Funzione per aggiornare lo stato delle vite sull'isola
 export function updateIslandLives(islandID, condition) {
     const lives = islandStates[islandID];
+    if (!lives) {
+        console.error("Stato delle vite non trovato per l'isola:", islandID);
+        return;
+    }
+
     for (let i = 0; i < lives.length; i++) {
         if (lives[i] === null) {
             lives[i] = condition;
