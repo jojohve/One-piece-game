@@ -13,8 +13,8 @@
     <div class="index-container">
         <h1>One Piece Card Game</h1>
 
-        <!-- <button style="margin: 50px;">G1 vs CPU</button><br>  -->
-        <button onclick="startGame()" class="startGame">G1 vs G2</button>
+        <button style="margin: 10px;" onclick="startGame('cpu')" class="startGame">G1 vs CPU</button><br>
+        <button onclick="startGame('human')" class="startGame">G1 vs G2</button>
 
         <div class="carousel">
             <div class="carousel-inner" id="carousel">
@@ -23,11 +23,12 @@
         </div>
 
         <script>
-            function startGame() {
+            function startGame(mode) {
                 localStorage.clear();
+                localStorage.setItem('gameMode', mode);
 
                 window.location.href = 'selection.html';
-            } 
+            }
         </script>
 
         <script type="module">

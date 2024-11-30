@@ -170,10 +170,11 @@ button.disabled {
 
 .carousel {
     display: flex;
+    justify-content: center;
     overflow: hidden;
     width: 800px;
     height: 400px;
-    margin: 250px auto;
+    margin: 150px auto;
     bottom: 5px;
     padding: 10px;
     background: radial-gradient(circle at 18.7% 37.8%, rgb(250, 250, 250) 0%, rgb(225, 234, 238) 90%);
@@ -353,7 +354,7 @@ span.specialMove {
     }
 
     .startGame {
-        padding: 20px 20px;
+        padding: 10px 10px;
         font-size: 1.4rem;
     }
 

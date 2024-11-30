@@ -6,10 +6,15 @@ export let currentPlayer = 1;
 let hasMoved = false;
 let hasUsedSpecialMove = false;
 let hasUsedHaki = false;
+let gameMode; // Variabile per la modalità di gioco
 
 document.addEventListener('DOMContentLoaded', () => {
     // Recupera i mazzi dal localStorage
     const { player1Deck, player2Deck } = getDeckFromStorage();
+
+    // Recupera la modalità di gioco dal localStorage
+    gameMode = localStorage.getItem('gameMode');
+    console.log(`Modalità di gioco: ${gameMode}`);
 
     // Verifica che i mazzi siano recuperati correttamente
     console.log('Mazzo del Giocatore 1:', player1Deck);
@@ -20,10 +25,18 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('I mazzi non sono stati trovati!');
         return;
     }
+
     // Inizializza il gioco solo dopo aver recuperato i mazzi
     startGame(player1Deck, player2Deck);
     checkForWinner();
 });
+
+// Funzione per recuperare i mazzi dal localStorage
+function getDeckFromStorage() {
+    const player1Deck = JSON.parse(localStorage.getItem('player1Deck')) || [];
+    const player2Deck = JSON.parse(localStorage.getItem('player2Deck')) || [];
+    return { player1Deck, player2Deck }; // Restituisce entrambe le mani con tutte le carte
+}
 
 // Funzione per avviare il gioco
 export function startGame(player1Deck, player2Deck) {
@@ -54,12 +67,6 @@ export function startGame(player1Deck, player2Deck) {
 
     testaOcroce();
     Turn();
-}
-
-function getDeckFromStorage() {
-    const player1Deck = JSON.parse(localStorage.getItem('player1Deck')) || [];
-    const player2Deck = JSON.parse(localStorage.getItem('player2Deck')) || [];
-    return { player1Deck, player2Deck }; // Restituisce entrambe le mani con tutte le carte
 }
 
 // Funzione per testa o croce
@@ -105,6 +112,23 @@ export function setHasUsedHaki(value) {
     hasUsedHaki = value;
 }
 
+// Funzione per gestire i turni della CPU 
+function cpuTurn() {
+    console.log("Turno della CPU");
+    // Implementa la logica per l'azione della CPU qui 
+    // Ad esempio, la CPU può fare una mossa casuale 
+    makeRandomMove();
+    // Passa il turno al giocatore umano dopo la mossa della CPU
+    switchTurn();
+    Turn();
+}
+
+function makeRandomMove() {
+    console.log("La CPU sta facendo una mossa casuale...");
+    // Implementa la logica per una mossa casuale della CPU 
+    // Ad esempio, la CPU può scegliere una carta casuale e giocarla
+}
+
 function Turn() {
     turnNumber++;
     console.log("Turno numero: " + turnNumber);
@@ -116,12 +140,22 @@ function Turn() {
     hasMoved = false;
     hasUsedSpecialMove = false; // Resettiamo l'uso della mossa speciale a ogni turno
     toggleButtonsAndCards();
+
+    // Se la modalità di gioco è contro la CPU e non è il turno del giocatore 1, esegui il turno della CPU
+    if (gameMode === 'cpu' && currentPlayer === 2) {
+        cpuTurn();
+    }
 }
 
 function switchTurn() {
     currentPlayer = currentPlayer === 1 ? 2 : 1;
     console.log(`Turno cambiato: Giocatore ${currentPlayer}`);
     document.getElementById('current-player').innerText = `Giocatore ${currentPlayer}`;
+
+    // Se la modalità di gioco è contro la CPU e non è il turno del giocatore 1, esegui il turno della CPU
+    if (gameMode === 'cpu' && currentPlayer === 2) {
+        cpuTurn();
+    }
 }
 
 function toggleButtonsAndCards() {
