@@ -1,6 +1,6 @@
 import { assignIslandIDs } from "./islands.js";
 import { displayBattleCards, updateCardPosition, updateCardDisplay } from "./ui.js";
-import { useHaki, useSpecialMove } from './abilities.js'
+import { useHaki, useSpecialMove, applyObservationHakiDamageReduction } from './abilities.js'
 import { checkPreferredIslandAndBoostDamage } from './drag.js';
 
 let turnNumber = 0;
@@ -166,26 +166,23 @@ function makeRandomMove() {
 
 function performAttackAndUseAbilities() {
     const cpuDeck = window.player2Deck;
+    const randomCardIndex = Math.floor(Math.random() * cpuDeck.length);
+    const card = cpuDeck[randomCardIndex];
 
-    for (let i = 0; i < cpuDeck.length; i++) {
-        const card = cpuDeck[i];
-
-        // Verifica se ci sono nemici sulla stessa isola e l'isola non è una zona iniziale
-        if (isEnemyOnSameIsland(card) && !isInitialZone(card.islandId)) {
-            useSpecialMove(`battle-card-2-${card.id}`);
-            break; // Attacca una volta per turno
-        }
-
-        // Decidi arbitrariamente se usare l'Haki
-        if (!card.hasUsedHaki && shouldUseHaki()) {
-            useHaki(`battle-card-2-${card.id}`);
-            card.hasUsedHaki = true; // Segna che l'Haki è stato usato
-            setHasUsedHaki(true);
-            break; // Usa l'Haki una volta per turno
-        }
+    if (isEnemyOnSameIsland(card) && !isInitialZone(card.islandId)) {
+        const damage = applyObservationHakiDamageReduction(card, card.specialMove.damage);
+        // Applica la riduzione del danno
+        useSpecialMove(`battle-card-2-${card.id}`, damage);
+        // Passa il danno ridotto alla funzione di attacco
     }
 
-    setHasUsedSpecialMove(false); // Reset dello stato dopo l'attacco e l'uso delle abilità
+    if (!card.hasUsedHaki && shouldUseHaki()) {
+        useHaki(`battle-card-2-${card.id}`);
+        card.hasUsedHaki = true;
+        setHasUsedHaki(true);
+    }
+
+    setHasUsedSpecialMove(false
 }
 
 function isEnemyOnSameIsland(card) {

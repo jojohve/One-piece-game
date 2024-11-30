@@ -17,6 +17,8 @@ export function useHaki(cardId) {
                 updateCardDisplay(currentCardId);
                 break;
             case 'Osservazione':
+                cardData.hasObservationHaki = true;
+                // Attiva l'Haki dell'Osservazione
                 alert(`Haki dell'Osservazione usato da: ${cardData.name}`);
                 break;
             case 'Conquistatore':
@@ -66,6 +68,22 @@ export function useHaki(cardId) {
     } else {
         console.log("Haki già usato per questa carta.");
     }
+}
+
+// Funzione per gestire il danno ridotto dall'Haki dell'Osservazione
+export function applyObservationHakiDamageReduction(card, damage) {
+    if (card.hasObservationHaki) {
+        damage -= 30;
+        // Riduci il danno di 30 punti
+
+        if (damage < 0) damage = 0;
+        // Assicura che il danno non sia negativo
+
+        card.hasObservationHaki = false;
+        // Resetta l'effetto dell'Haki dell'Osservazione dopo il primo attacco 
+        alert(`${card.name} ha ridotto il danno di 30 punti grazie all'Haki dell'Osservazione!`);
+    }
+    return damage;
 }
 
 // Funzione per usare la mossa speciale
@@ -126,7 +144,7 @@ export function useSpecialMove(cardId) {
                 if (enemyCard.hp <= 0) {
                     // Aggiorna le vite dell'isola
                     updateIslandLives(currentPosition, `kill-${currentPlayer}`);
-                    
+
                     alert(`${enemyCard.name} è stato sconfitto!`);
                     enemyDeck.splice(index, 1);
                     localStorage.setItem(`player${oppositePlayer}Deck`, JSON.stringify(enemyDeck));
