@@ -182,7 +182,7 @@ function performAttackAndUseAbilities() {
         setHasUsedHaki(true);
     }
 
-    setHasUsedSpecialMove(false
+    setHasUsedSpecialMove(false);
 }
 
 function isEnemyOnSameIsland(card) {
